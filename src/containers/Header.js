@@ -1,12 +1,16 @@
 import React from "react";
 import {
   Dropdown,
+  Image,
   Icon,
   Menu,
   Segment,
   Header,
   Container
 } from "semantic-ui-react";
+import { Link, NavLink, withRouter } from "react-router-dom";
+
+import loggrLogo from "../log.svg";
 
 const NavBar = () => (
   <Menu attached="top">
@@ -21,7 +25,9 @@ const NavBar = () => (
               <Dropdown.Item>New Project</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown.Item>
-          <Dropdown.Item>(?)Settings(?)</Dropdown.Item>
+          <Dropdown.Item>
+            <NavLink to="/index">Project Index</NavLink>
+          </Dropdown.Item>
           <Dropdown.Item>(?)Share a project(?)</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
@@ -31,10 +37,11 @@ const NavBar = () => (
         style={{ flex: "auto", "justify-content": "flex-end" }}
         floated="right"
       >
-        {/* <Image size="mini" src="/logo.png" style={{ marginRight: "1.5em" }} /> */}
         Loggr
+        <NavLink to="/">
+          <Image src={loggrLogo} style={{ height: "2em" }} />
+        </NavLink>
       </Menu.Item>
-      {/* <h3 style={{ float: "right" }}>DockIT</h3> */}
     </Container>
   </Menu>
 );
