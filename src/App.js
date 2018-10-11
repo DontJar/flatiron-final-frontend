@@ -5,6 +5,7 @@ import "./App.css";
 import Header from "./containers/Header";
 import Main from "./containers/Main";
 import ProjectsIndex from "./containers/ProjectsIndex";
+import ProjectContainer from "./containers/ProjectContainer";
 
 class App extends Component {
   constructor() {
@@ -43,7 +44,13 @@ class App extends Component {
           <Route
             exact
             path="/index"
+            /*this is defaulting to the first project just to have something to play with */
             render={() => <ProjectsIndex projects={this.state.projects} />}
+          />
+          <Route
+            exact
+            path="/project"
+            render={() => <ProjectContainer project={this.state.projects[0]} />}
           />
         </Switch>
       </div>
