@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
+import { Sticky } from "semantic-ui-react";
 
 import "./App.css";
 import Header from "./containers/Header";
@@ -48,9 +49,14 @@ class App extends Component {
             render={() => <ProjectsIndex projects={this.state.projects} />}
           />
           <Route
-            exact
-            path="/project"
-            render={() => <ProjectContainer project={this.state.projects[0]} />}
+            path="/projects/:id"
+            render={data => {
+              let targetID = parseInt(data.match.params.id, 10);
+              let targetProject = this.state.projects.filter(
+                project => project.id === targetID
+              )[0];
+              return <ProjectContainer project={targetProject} />;
+            }}
           />
         </Switch>
       </div>
@@ -59,3 +65,5 @@ class App extends Component {
 }
 
 export default App;
+
+// this.state.projects.filter(project => project.id === targetID)

@@ -17,7 +17,11 @@ const NavBar = () => (
     <Container>
       <Dropdown item icon="bars" simple>
         <Dropdown.Menu>
-          <Dropdown.Header>All Projects</Dropdown.Header>
+          <Dropdown.Item>
+            <NavLink to="/index">
+              <Dropdown.Header>All Projects</Dropdown.Header>
+            </NavLink>
+          </Dropdown.Item>
           <Dropdown.Item>
             <Icon name="dropdown" />
             <span className="text">New</span>
@@ -25,9 +29,7 @@ const NavBar = () => (
               <Dropdown.Item>New Project</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown.Item>
-          <Dropdown.Item>
-            <NavLink to="/index">Project Index</NavLink>
-          </Dropdown.Item>
+
           <Dropdown.Item>(?)Share a project(?)</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
