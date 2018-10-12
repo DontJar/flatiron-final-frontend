@@ -1,8 +1,9 @@
 import React from "react";
 import ProjectCover from "../components/ProjectCover";
+import { connect } from "react-redux";
 
 const ProjectContainer = props => {
-  // debugger;
+  debugger;
   return (
     <div>
       A Single Project's page
@@ -15,4 +16,10 @@ const ProjectContainer = props => {
   );
 };
 
-export default ProjectContainer;
+const mapStateToProps = state => {
+  return {
+    project: state.project
+  };
+};
+
+export default connect(mapStateToProps)(ProjectContainer);

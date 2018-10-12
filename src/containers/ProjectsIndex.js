@@ -1,10 +1,10 @@
 import React from "react";
 import { Card, Button, Input } from "semantic-ui-react";
+import { connect } from "react-redux";
 
 import ProjectCard from "../components/ProjectCard";
 
 const ProjectsIndex = props => {
-  // debugger;
   return (
     <div>
       <Input icon="search" placeholder="Search..." />
@@ -17,4 +17,10 @@ const ProjectsIndex = props => {
   );
 };
 
-export default ProjectsIndex;
+const mapStateToProps = state => {
+  return {
+    projects: state.projects
+  };
+};
+
+export default connect(mapStateToProps)(ProjectsIndex);

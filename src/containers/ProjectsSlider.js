@@ -1,10 +1,11 @@
 import React from "react";
 import { Card, Button } from "semantic-ui-react";
-import { Link, NavLink, withRouter } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 
 import ProjectCard from "../components/ProjectCard";
 
-const ProjectsSlider = props => {
+const ProjectsSlider = state => {
   // debugger;
   return (
     <div>
@@ -19,8 +20,8 @@ const ProjectsSlider = props => {
           "overflow-x": "hidden"
         }}
       >
-        {props.projects &&
-          props.projects.map(project => (
+        {state.projects &&
+          state.projects.map(project => (
             <Card.Group>
               <ProjectCard project={project} />
             </Card.Group>
@@ -30,4 +31,8 @@ const ProjectsSlider = props => {
   );
 };
 
-export default ProjectsSlider;
+const mapStateToProps = state => {
+  return { projects: state.projects };
+};
+
+export default connect(mapStateToProps)(ProjectsSlider);

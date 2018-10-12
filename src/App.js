@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { Sticky } from "semantic-ui-react";
 
@@ -7,47 +8,21 @@ import Header from "./containers/Header";
 import Main from "./containers/Main";
 import ProjectsIndex from "./containers/ProjectsIndex";
 import ProjectContainer from "./containers/ProjectContainer";
+import { fetchProjects } from "./redux/actions";
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      projects: []
-    };
+  componentDidMount() {
+    this.props.fetchProjects();
   }
 
-  componentDidMount = () => {
-    this.fetchProjects();
-  };
-
-  fetchProjects = () => {
-    fetch("http://localhost:3000/api/v1/projects")
-      .then(r => r.json())
-      .then(json =>
-        this.setState({
-          projects: json
-        })
-      );
-  };
-
   render() {
-    // debugger;
-    console.log("App.js is 🚀");
     return (
       <div>
         <Header />
         <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => <Main projects={this.state.projects} />}
-          />
-          <Route
-            exact
-            path="/index"
-            /*this is defaulting to the first project just to have something to play with */
-            render={() => <ProjectsIndex projects={this.state.projects} />}
-          />
+          <Route exact path="/" render={() => <Main />} />
+          <Route exact path="/index" render={() => <ProjectsIndex />} />
+
           <Route
             path="/projects/:id"
             render={data => {
@@ -64,6 +39,13 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = state => {
+  return {
+    projects: state.projects
+  };
+};
 
-// this.state.projects.filter(project => project.id === targetID)
+export default connect(
+  mapDispatchToProps,
+  { fetchProjects }
+)(App);
