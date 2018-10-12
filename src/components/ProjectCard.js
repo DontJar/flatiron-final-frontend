@@ -2,6 +2,8 @@ import React from "react";
 import { Card, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
+import noImage from "../no-image.png";
+
 const ProjectCard = props => {
   return (
     <Card raised key={props.project.id}>
@@ -11,7 +13,11 @@ const ProjectCard = props => {
             {props.project.title}
           </Card.Description>
         </Card.Content>
-        <Image src={props.project.images[0].url} />
+        {props.project.images.length > 1 ? (
+          <Image src={props.project.images[0].url} />
+        ) : (
+          <Image src={noImage} />
+        )}
       </Link>
     </Card>
   );
