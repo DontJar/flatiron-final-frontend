@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import { Sticky } from "semantic-ui-react";
 
 import "./App.css";
@@ -16,18 +16,18 @@ class App extends Component {
   }
 
   render() {
+    // debugger;
     return (
       <div>
         <Header />
         <Switch>
           <Route exact path="/" render={() => <Main />} />
           <Route exact path="/index" render={() => <ProjectsIndex />} />
-
           <Route
             path="/projects/:id"
             render={data => {
               let targetID = parseInt(data.match.params.id, 10);
-              let targetProject = this.state.projects.filter(
+              let targetProject = this.props.projects.filter(
                 project => project.id === targetID
               )[0];
               return <ProjectContainer project={targetProject} />;
@@ -45,7 +45,9 @@ const mapDispatchToProps = state => {
   };
 };
 
-export default connect(
-  mapDispatchToProps,
-  { fetchProjects }
-)(App);
+export default withRouter(
+  connect(
+    mapDispatchToProps,
+    { fetchProjects }
+  )(App)
+);

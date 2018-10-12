@@ -3,7 +3,7 @@ import ProjectCover from "../components/ProjectCover";
 import { connect } from "react-redux";
 
 const ProjectContainer = props => {
-  debugger;
+  // debugger;
   return (
     <div>
       A Single Project's page
@@ -16,9 +16,9 @@ const ProjectContainer = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, propsFromParent) => {
   return {
-    project: state.project
+    project: propsFromParent.project
   };
 };
 
