@@ -12,7 +12,8 @@ class NewStepModalForm extends React.Component {
       modalOpen: false,
       project_id: "",
       description: "",
-      imageUrl: ""
+      imageUrl: "",
+      isChecked: false
     };
   }
 
@@ -35,12 +36,20 @@ class NewStepModalForm extends React.Component {
     });
   }
 
+  handleBoxClick() {
+    this.setState({
+      isChecked: !this.state.isChecked,
+      imageUrl: ""
+    });
+  }
+
   submitHandler(e) {
     this.toggleModal();
     this.props.createNewStep(this.state);
     this.setState({
       description: "",
-      imageUrl: ""
+      imageUrl: "",
+      isChecked: false
     });
   }
 
@@ -64,15 +73,29 @@ class NewStepModalForm extends React.Component {
                   value={this.state.description}
                   onChange={e => this.handelChange(e)}
                 />
-                <Form.Input
-                  fluid
-                  label="Image URL"
-                  placeholder="Enter a URL for this step's first image"
-                  vlaue={this.state.imageUrl}
-                  onChange={e => this.handelUrlChange(e)}
-                />
+                {!this.state.isChecked ? (
+                  <Form.Input
+                    fluid
+                    label="Image URL"
+                    placeholder="Enter a URL for this step's first image"
+                    value={this.state.imageUrl}
+                    onChange={e => this.handelUrlChange(e)}
+                  />
+                ) : (
+                  <Form.Input
+                    disabled
+                    fluid
+                    label="Image URL"
+                    placeholder="Enter a URL for this step's first image"
+                    value={this.state.imageUrl}
+                  />
+                )}
               </Form.Group>
-              <Form.Checkbox label="No Image yet!" />
+              <Form.Checkbox
+                label="No Image yet!"
+                value={this.state.isChecked}
+                onChange={() => this.handleBoxClick()}
+              />
               <Button type="submit">Submit</Button>
               <Button
                 icon="delete"

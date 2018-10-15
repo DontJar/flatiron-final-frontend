@@ -14,7 +14,7 @@ const ProjectCard = props => {
             {props.project.title}
           </Card.Description>
         </Card.Content>
-        {props.project.steps[0].images.length > 0 ? (
+        {props.project.steps.length > 0 ? (
           <Image src={props.project.steps[0].images[0].url} />
         ) : (
           <Image src={noImage} />

@@ -51,7 +51,7 @@ class ProjectCover extends React.Component {
         </div> */}
         <div>
           <Segment>
-            {this.props.project.steps[0].images.length > 0 ? (
+            {this.props.project.steps > 0 ? (
               <Image
                 size="medium"
                 centered
