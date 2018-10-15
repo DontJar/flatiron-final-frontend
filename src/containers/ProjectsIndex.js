@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button, Input } from "semantic-ui-react";
+import { Card, Input } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 import ProjectCard from "../components/ProjectCard";

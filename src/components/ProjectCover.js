@@ -1,58 +1,107 @@
 import React from "react";
-import { Image, Button, Container } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router";
+import {
+  Image,
+  Button,
+  Container,
+  Segment,
+  Form,
+  TextArea
+} from "semantic-ui-react";
 
+import { updateProject } from "../redux/actions";
 import noImage from "../no-image.png";
-import { deleteProject } from "../redux/actions";
 
-const ProjectCover = props => {
-  // debugger;
+class ProjectCover extends React.Component {
+  constructor() {
+    super();
+    this.state = { editingDescription: false };
+  }
 
-  const handleDeleteClick = () => {
-    props.history.push("/");
-    // debugger;
-    props.deleteProject(props.project.id);
-  };
+  handleEditClick() {
+    this.setState({
+      editingDescription: !this.state.editingDescription,
+      description: this.props.project.description
+    });
+  }
 
-  return (
-    <Container fluid>
-      <div>
-        Title:
-        <strong>{props.project.title}</strong>
-      </div>
-      <div>
-        Begun: <strong>{props.project.start_date}</strong>
-      </div>
-      <div>
-        Cover Picture
-        {props.project.images.length > 1 ? (
-          <Image src={props.project.images[0].url} />
+  handleDescriptionChange(e) {
+    this.setState({
+      description: e.target.value
+    });
+  }
+
+  handleSaveClick() {
+    this.setState({
+      editingDescription: false
+    });
+    this.props.updateProject(this.state, this.props.project.id);
+  }
+
+  render() {
+    return (
+      <Container fluid>
+        <div>
+          Title:
+          <strong>{this.props.project.title}</strong>
+        </div>
+        {/* TODO: implement the code below
+         <div>
+          Begun: <strong>{this.props.project.start_date}</strong>
+        </div> */}
+        <div>
+          <Segment>
+            {this.props.project.steps[0].images.length > 0 ? (
+              <Image
+                size="medium"
+                centered
+                src={this.props.project.steps[0].images[0].url}
+              />
+            ) : (
+              <Image src={noImage} />
+            )}
+          </Segment>
+        </div>
+        <Button>Change Cover Image</Button>
+        {!this.state.editingDescription ? (
+          <div>
+            Description: <strong>{this.props.project.description}</strong>
+          </div>
         ) : (
-          <Image src={noImage} />
+          <Form>
+            <TextArea
+              value={this.state.description}
+              onChange={e => this.handleDescriptionChange(e)}
+            />
+          </Form>
         )}
-      </div>
-      <div>
-        Description: <strong>{props.project.description}</strong>
-      </div>
-      <Button>Change Cover Image</Button>
-      <Button floated="right">Add Step</Button>
-      <br />
-      <Button icon="delete" floated="right" onClick={handleDeleteClick} />
-      <Button icon="save" floated="left" />
-    </Container>
-  );
-};
-//
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     deleteProject: deleteProject => dispatch(deleteProject(deleteProject))
-//   };
-// };
+        {!this.state.editingDescription ? (
+          <Button onClick={() => this.handleEditClick()}>
+            Change Project Description
+          </Button>
+        ) : (
+          <div>
+            <Button onClick={() => this.handleEditClick()}>Cancel</Button>
+            <Button
+              icon="save"
+              floated="right"
+              onClick={() => this.handleSaveClick()}
+            />
+          </div>
+        )}
+      </Container>
+    );
+  }
+}
 
-export default withRouter(
-  connect(
-    null,
-    { deleteProject }
-  )(ProjectCover)
-);
+const mapDispatchToProps = dispatch => {
+  return {
+    updateProject: (projecDetails, projectId) =>
+      dispatch(updateProject(projecDetails, projectId))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(ProjectCover);

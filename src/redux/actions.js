@@ -13,12 +13,30 @@ function fetchedProjects(projects) {
   return { type: "UPDATE_STORE_WITH_ALL_PROJECTS", projects };
 }
 
-function createNewProject(newProjectName) {
+function createNewProject(newProject) {
   return dispatch => {
     fetch(`${URL}projects`, {
       method: "POST",
       body: JSON.stringify({
-        title: newProjectName
+        title: newProject.name,
+        description: newProject.description
+      }),
+      headers: {
+        "Content-type": "application/json",
+        Accept: "application/json"
+      }
+    })
+      .then(r => r.json())
+      .then(json => dispatch(fetchProjects()));
+  };
+}
+
+function updateProject(projectInfo, id) {
+  return dispatch => {
+    fetch(`${URL}projects/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        description: projectInfo.description
       }),
       headers: {
         "Content-type": "application/json",
@@ -31,8 +49,6 @@ function createNewProject(newProjectName) {
 }
 
 function deleteProject(projectId) {
-  // debugger;
-  // console.log(`${URL}projects\${projectId}`);
   return dispatch => {
     fetch(`${URL}projects/` + projectId, {
       method: "DELETE",
@@ -43,4 +59,49 @@ function deleteProject(projectId) {
   };
 }
 
-export { fetchProjects, createNewProject, deleteProject };
+function createNewStep(newStep) {
+  return dispatch => {
+    fetch(`${URL}steps`, {
+      method: "POST",
+      body: JSON.stringify({
+        project_id: newStep.project_id,
+        description: newStep.description
+      }),
+      headers: {
+        "Content-type": "application/json",
+        Accept: "application/json"
+      }
+    })
+      .then(r => r.json())
+      .then(json => dispatch(addNewImage(json.id, newStep.imageUrl)));
+  };
+}
+
+function addNewImage(stepId, imageUrl) {
+  return dispatch => {
+    fetch(`${URL}images`, {
+      method: "POST",
+      body: JSON.stringify({
+        step_id: stepId,
+        url: imageUrl
+      }),
+      headers: {
+        "Content-type": "application/json",
+        Accept: "application/json"
+      }
+    })
+      .then(r => r.json())
+      .then(dispatch(fetchProjects()));
+  };
+}
+
+// t.string "url"
+// t.integer "step_id"
+
+export {
+  fetchProjects,
+  createNewProject,
+  deleteProject,
+  updateProject,
+  createNewStep
+};

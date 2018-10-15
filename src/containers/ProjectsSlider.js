@@ -16,14 +16,14 @@ const ProjectsSlider = state => {
       <div
         style={{
           overflow: "scroll",
-          maxheight: "700px",
-          "overflow-x": "hidden"
+          maxHeight: "500px",
+          overflowX: "hidden"
         }}
       >
         {state.projects &&
           state.projects.map(project => (
-            <Card.Group>
-              <ProjectCard project={project} />
+            <Card.Group key={project.id}>
+              <ProjectCard project={project} key={`project_id${project.id}`} />
             </Card.Group>
           ))}
       </div>

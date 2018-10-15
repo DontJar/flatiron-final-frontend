@@ -5,16 +5,17 @@ import { Link } from "react-router-dom";
 import noImage from "../no-image.png";
 
 const ProjectCard = props => {
+  // debugger;
   return (
     <Card raised key={props.project.id}>
       <Link className="item" to={`/projects/${props.project.id}`}>
         <Card.Content>
-          <Card.Description style={{ "text-align": "center" }}>
+          <Card.Description style={{ textAlign: "center" }}>
             {props.project.title}
           </Card.Description>
         </Card.Content>
-        {props.project.images.length > 1 ? (
-          <Image src={props.project.images[0].url} />
+        {props.project.steps[0].images.length > 0 ? (
+          <Image src={props.project.steps[0].images[0].url} />
         ) : (
           <Image src={noImage} />
         )}
