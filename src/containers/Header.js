@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import loggrLogo from "../log.svg";
 
 const NavBar = () => (
-  <Menu attached="top">
+  <Menu fixed="top">
     <Container>
       <Dropdown item icon="bars" simple>
         <Dropdown.Menu>

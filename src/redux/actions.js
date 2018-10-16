@@ -59,6 +59,17 @@ function deleteProject(projectId) {
   };
 }
 
+function deleteImage(imageId) {
+  return dispatch => {
+    fetch(`${URL}images/` + imageId, {
+      method: "DELETE",
+      body: JSON.stringify({ id: imageId })
+    })
+      .then(r => r.json())
+      .then(json => dispatch(fetchProjects()));
+  };
+}
+
 function createNewStep(newStep) {
   return dispatch => {
     fetch(`${URL}steps`, {
@@ -89,6 +100,7 @@ function deleteStep(stepId) {
 }
 
 function addNewImage(stepId, imageUrl) {
+  // debugger;
   return dispatch => {
     fetch(`${URL}images`, {
       method: "POST",
@@ -115,5 +127,7 @@ export {
   deleteProject,
   updateProject,
   createNewStep,
-  deleteStep
+  deleteStep,
+  addNewImage,
+  deleteImage
 };

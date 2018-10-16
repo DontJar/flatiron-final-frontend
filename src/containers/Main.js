@@ -8,14 +8,16 @@ class Main extends Component {
   render() {
     // debugger;
     return (
-      <Grid padded>
-        <Grid.Column width={10}>
-          <NewProject />
-        </Grid.Column>
-        <Grid.Column width={6}>
-          <ProjectsSlider />
-        </Grid.Column>
-      </Grid>
+      <div style={{ marginTop: "4em" }}>
+        <Grid padded>
+          <Grid.Column width={10}>
+            <NewProject />
+          </Grid.Column>
+          <Grid.Column width={6}>
+            <ProjectsSlider />
+          </Grid.Column>
+        </Grid>
+      </div>
     );
   }
 }

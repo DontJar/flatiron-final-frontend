@@ -1,14 +1,25 @@
 import React from "react";
-import { Image, Button, Confirm } from "semantic-ui-react";
+import {
+  Image,
+  Button,
+  Confirm,
+  Card,
+  Grid,
+  Icon,
+  Divider
+} from "semantic-ui-react";
 
 import { connect } from "react-redux";
 
 import noImage from "../no-image.png";
 import { deleteStep } from "../redux/actions";
+import StepImage from "./StepImage";
+import NewImageModal from "./NewImageModal";
 
 class ProjectStep extends React.Component {
   state = {
-    open: false
+    open: false,
+    imageOpen: false
   };
 
   deleteWarning = () => {
@@ -18,40 +29,97 @@ class ProjectStep extends React.Component {
   };
 
   handleCancel = () => {
-    console.log("'Cancel' clicked");
     this.setState({
       open: false
     });
   };
 
   handleConfirm = () => {
-    console.log("'Confirm' clicked");
     this.setState({
       open: false
     });
-    // console.log(this.props.thisStep.id);
     this.props.deleteStep(this.props.thisStep.id);
   };
+
+  // imageDelete = () => {
+  //   this.setState({
+  //     imageOpen: true
+  //   });
+  // };
+
+  // handleImageDelete = e => {
+  //   console.log(e);
+  //   // this.setState({
+  //   //   open: false
+  //   // });
+  //   // this.props.deleteStep(this.props.thisStep.id);
+  // };
+
+  // imageHandleCancel = () => {
+  //   console.log("clicked");
+  //   this.setState({
+  //     imageOpen: false
+  //   });
+  // };
 
   render() {
     const { open } = this.state;
     return (
       <div>
         {this.props.thisStep.images.length > 0 ? (
-          <Image src={this.props.thisStep.images[0].url} />
+          <a href={this.props.thisStep.images[0].url}>
+            <Image src={this.props.thisStep.images[0].url} />
+          </a>
         ) : (
           <Image centered size="tiny" src={noImage} />
         )}
+        {this.props.thisStep.images.length > 1 ? (
+          <Card.Group centered itemsPerRow={3} style={{ margin: "auto" }}>
+            {this.props.thisStep.images.slice(1).map(image => (
+              <Card centered>
+                <StepImage image={image} />
+                {/* <Card.Content>
+                  <a href={image.url}>
+                    <div>
+                      <Image src={image.url} size="tiny" />
+                    </div>
+                  </a>
+                  <div style={{ float: "right" }}>
+                    <Icon
+                      onClick={this.imageDelete}
+                      name="delete"
+                      size="small"
+                      color="red"
+                    />
+                  </div>
+                  <Confirm
+                    open={imageOpen}
+                    content="Confirm image delete"
+                    cancelButton="cancel"
+                    onCancel={this.imageHandleCancel}
+                    confirmButton="DELETE"
+                    onConfirm={this.handleImageDelete}
+                  />
+                </Card.Content> */}
+              </Card>
+            ))}
+          </Card.Group>
+        ) : null}
         <div>In this step: {this.props.thisStep.description}</div>
+
         <Button onClick={this.deleteWarning}>Remove Step</Button>
         <Confirm
           open={open}
-          content="Confirm that you would like to remove this step."
+          content="Click to view or delete this image."
           cancelButton="cancel"
+          viewButton="view"
           confirmButton="DELETE"
           onCancel={this.handleCancel}
+          onView={this.handleView}
           onConfirm={this.handleConfirm}
         />
+        <NewImageModal stepId={this.props.thisStep.id} />
+        <br />
       </div>
     );
   }

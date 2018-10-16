@@ -1,6 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Button, Segment, Dimmer, Loader } from "semantic-ui-react";
+import {
+  Button,
+  Segment,
+  Dimmer,
+  Loader,
+  Confirm,
+  Divider,
+  Icon
+} from "semantic-ui-react";
 import { withRouter } from "react-router";
 import { deleteProject } from "../redux/actions";
 
@@ -9,19 +17,33 @@ import ProjectStep from "../components/ProjectStep";
 import NewStepModalForm from "../components/NewStepModalForm";
 
 class ProjectContainer extends React.Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     editingDescription: false
-  //   };
-  // }
+  state = {
+    open: false
+  };
 
-  handleDeleteClick = () => {
+  deleteWarning = () => {
+    this.setState({
+      open: true
+    });
+  };
+
+  handleCancel = () => {
+    console.log("'Cancel' clicked");
+    this.setState({
+      open: false
+    });
+  };
+
+  handleConfirm = () => {
+    this.setState({
+      open: false
+    });
     this.props.history.push("/");
     this.props.deleteProject(this.props.project.id);
   };
 
   render() {
+    const { open } = this.state;
     return (
       <div>
         {!this.props.project ? (
@@ -39,17 +61,26 @@ class ProjectContainer extends React.Component {
               {this.props.project &&
                 this.props.project.steps &&
                 this.props.project.steps.map(step => (
-                  <ProjectStep thisStep={step} key={step.id} />
+                  <div>
+                    <ProjectStep thisStep={step} key={step.id} />
+                    <Divider />
+                  </div>
                 ))}
+              <br />
               <NewStepModalForm />
               <br />
-              <Button
-                floated="right"
-                onClick={this.handleDeleteClick}
-                color="red"
-              >
+              <Button floated="right" onClick={this.deleteWarning} color="red">
+                <Icon name="delete" />
                 Delete this Project
               </Button>
+              <Confirm
+                open={open}
+                content="Confirm that you would like to delete this entire project this step."
+                cancelButton="cancel"
+                confirmButton="DELETE"
+                onCancel={this.handleCancel}
+                onConfirm={this.handleConfirm}
+              />
             </div>
           </div>
         )}

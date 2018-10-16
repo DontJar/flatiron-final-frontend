@@ -40,56 +40,62 @@ class ProjectCover extends React.Component {
 
   render() {
     return (
-      <Container fluid>
-        <div>
-          Title:
-          <strong>{this.props.project.title}</strong>
-        </div>
-        {/* TODO: implement the code below
+      <div style={{ "margin-top": "5em" }}>
+        <Container fluid>
+          <div>
+            <h2>
+              <strong>{this.props.project.title}</strong>
+            </h2>
+          </div>
+          {/* TODO: implement the code below
          <div>
           Begun: <strong>{this.props.project.start_date}</strong>
         </div> */}
-        <div>
-          <Segment>
-            {this.props.project.steps > 0 ? (
-              <Image
-                size="medium"
-                centered
-                src={this.props.project.steps[0].images[0].url}
+          <div>
+            <Segment>
+              {this.props.project.steps > 0 ? (
+                <Image
+                  size="medium"
+                  centered
+                  src={this.props.project.steps[0].images[0].url}
+                />
+              ) : (
+                <Image src={noImage} />
+              )}
+            </Segment>
+          </div>
+          <Button size="tiny">Change Cover Image</Button>
+          {!this.state.editingDescription ? (
+            <div>
+              Description: <strong>{this.props.project.description}</strong>
+            </div>
+          ) : (
+            <Form>
+              <TextArea
+                value={this.state.description}
+                onChange={e => this.handleDescriptionChange(e)}
               />
-            ) : (
-              <Image src={noImage} />
-            )}
-          </Segment>
-        </div>
-        <Button>Change Cover Image</Button>
-        {!this.state.editingDescription ? (
-          <div>
-            Description: <strong>{this.props.project.description}</strong>
-          </div>
-        ) : (
-          <Form>
-            <TextArea
-              value={this.state.description}
-              onChange={e => this.handleDescriptionChange(e)}
-            />
-          </Form>
-        )}
-        {!this.state.editingDescription ? (
-          <Button onClick={() => this.handleEditClick()}>
-            Change Project Description
-          </Button>
-        ) : (
-          <div>
-            <Button onClick={() => this.handleEditClick()}>Cancel</Button>
-            <Button
-              icon="save"
-              floated="right"
-              onClick={() => this.handleSaveClick()}
-            />
-          </div>
-        )}
-      </Container>
+            </Form>
+          )}
+          {!this.state.editingDescription ? (
+            <Button size="tiny" onClick={() => this.handleEditClick()}>
+              Edit Description
+            </Button>
+          ) : (
+            <div>
+              <Button size="tiny" onClick={() => this.handleEditClick()}>
+                Cancel
+              </Button>
+              <Button
+                icon="save"
+                floated="right"
+                onClick={() => this.handleSaveClick()}
+              />
+            </div>
+          )}
+        </Container>
+        <br />
+      </div>
     );
   }
 }

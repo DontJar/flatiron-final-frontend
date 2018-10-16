@@ -6,9 +6,10 @@ import ProjectCard from "../components/ProjectCard";
 
 const ProjectsIndex = props => {
   return (
-    <div>
-      <Input icon="search" placeholder="Search..." />
-
+    <div style={{ "margin-top": "5em" }}>
+      <div>
+        <Input icon="search" placeholder="Search..." />
+      </div>
       <Card.Group centered itemsPerRow={3} style={{ margin: "auto" }}>
         {props.projects &&
           props.projects.map(project => <ProjectCard project={project} />)}
