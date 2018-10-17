@@ -118,6 +118,21 @@ function addNewImage(stepId, imageUrl) {
   };
 }
 
+function uploadNewImage(stepId, fileToUpload) {
+  let formData = new FormData();
+  formData.append("step_id", stepId);
+  formData.append("step_image", fileToUpload);
+
+  return dispatch => {
+    fetch(`${URL}images`, {
+      method: "POST",
+      body: formData
+    })
+      .then(r => r.json())
+      .then(json => console.log(stepId, fileToUpload));
+  };
+}
+
 // t.string "url"
 // t.integer "step_id"
 
@@ -129,5 +144,6 @@ export {
   createNewStep,
   deleteStep,
   addNewImage,
+  uploadNewImage,
   deleteImage
 };

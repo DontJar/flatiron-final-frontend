@@ -3,7 +3,7 @@ import { Modal, Button, Form, Segment, Icon } from "semantic-ui-react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 
-import { addNewImage } from "../redux/actions";
+import { addNewImage, uploadNewImage } from "../redux/actions";
 
 class NewImageModal extends React.Component {
   constructor() {
@@ -35,12 +35,26 @@ class NewImageModal extends React.Component {
   }
 
   submitHandler(e) {
-    // debugger;
     this.toggleModal();
-    this.props.addNewImage(this.props.stepId, this.state.imageUrl);
-    this.setState({
-      imageUrl: ""
-    });
+    {
+      e.target.querySelector("#step_image").files.length > 0
+        ? this.props.uploadNewImage(
+            this.props.stepId,
+            e.target.querySelector("#step_image").files[0]
+          )
+        : this.props.addNewImage(this.props.stepId, this.state.imageUrl);
+      this.setState({
+        imageUrl: ""
+      });
+    }
+  }
+
+  onChangeFile() {
+    const fileButton = document.getElementById(this.id);
+    const file = fileButton && fileButton.files[0];
+    if (this.props.onSelect) {
+      this.props.onSelect(file);
+    }
   }
 
   render() {
@@ -71,8 +85,15 @@ class NewImageModal extends React.Component {
                   value={this.state.imageUrl}
                   onChange={e => this.handelUrlChange(e)}
                 />
+                <input
+                  label="Select a File"
+                  type="file"
+                  id="step_image"
+                  name="step_image"
+                  accept="image/png, image/jpeg"
+                />
               </Form.Group>
-
+              <br />
               <Button type="submit">Submit</Button>
               <Button
                 icon="delete"
@@ -89,7 +110,9 @@ class NewImageModal extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addNewImage: (stepId, newImage) => dispatch(addNewImage(stepId, newImage))
+    addNewImage: (stepId, newImage) => dispatch(addNewImage(stepId, newImage)),
+    uploadNewImage: (stepId, newImageFile) =>
+      dispatch(uploadNewImage(stepId, newImageFile))
   };
 };
 

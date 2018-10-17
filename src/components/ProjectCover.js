@@ -40,7 +40,7 @@ class ProjectCover extends React.Component {
 
   render() {
     return (
-      <div style={{ "margin-top": "5em" }}>
+      <div style={{ marginTop: "5em" }}>
         <Container fluid>
           <div>
             <h2>

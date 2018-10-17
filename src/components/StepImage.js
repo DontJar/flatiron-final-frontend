@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Button, Confirm, Card, Grid, Icon } from "semantic-ui-react";
+import { Image, Confirm, Card, Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 import { deleteImage } from "../redux/actions";

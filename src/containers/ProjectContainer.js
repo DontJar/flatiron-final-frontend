@@ -61,8 +61,8 @@ class ProjectContainer extends React.Component {
               {this.props.project &&
                 this.props.project.steps &&
                 this.props.project.steps.map(step => (
-                  <div>
-                    <ProjectStep thisStep={step} key={step.id} />
+                  <div key={step.id}>
+                    <ProjectStep thisStep={step} />
                     <Divider />
                   </div>
                 ))}
