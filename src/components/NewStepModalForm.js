@@ -3,7 +3,7 @@ import { Modal, Button, Form, Segment } from "semantic-ui-react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 
-import { createNewStep } from "../redux/actions";
+import { createNewStep, uploadNewImage } from "../redux/actions";
 
 class NewStepModalForm extends React.Component {
   constructor() {
@@ -13,6 +13,7 @@ class NewStepModalForm extends React.Component {
       project_id: "",
       description: "",
       imageUrl: "",
+      imageFile: null,
       isChecked: false
     };
   }
@@ -45,11 +46,19 @@ class NewStepModalForm extends React.Component {
 
   submitHandler(e) {
     this.toggleModal();
-    this.props.createNewStep(this.state);
+
+    e.target.querySelector("#step_image").files.length > 0
+      ? this.props.createNewStep(
+          this.state,
+          e.target.querySelector("#step_image").files[0]
+        )
+      : this.props.createNewStep(this.state, null);
+
     this.setState({
       description: "",
       imageUrl: "",
-      isChecked: false
+      isChecked: false,
+      imageFile: null
     });
   }
 
@@ -74,21 +83,49 @@ class NewStepModalForm extends React.Component {
                   onChange={e => this.handelChange(e)}
                 />
                 {!this.state.isChecked ? (
-                  <Form.Input
-                    fluid
-                    label="Image URL"
-                    placeholder="Enter a URL for this step's first image"
-                    value={this.state.imageUrl}
-                    onChange={e => this.handelUrlChange(e)}
-                  />
+                  <div>
+                    <Form.Input
+                      fluid
+                      label="Image URL"
+                      placeholder="Enter a URL for this step's first image"
+                      value={this.state.imageUrl}
+                      onChange={e => this.handelUrlChange(e)}
+                    />
+                    <br />
+                    <div className="ui fluid input">
+                      <input
+                        label="Select a File"
+                        type="file"
+                        id="step_image"
+                        name="step_image"
+                        accept="image/png, image/jpeg"
+                      />
+                    </div>
+                    <br />
+                  </div>
                 ) : (
-                  <Form.Input
-                    disabled
-                    fluid
-                    label="Image URL"
-                    placeholder="Enter a URL for this step's first image"
-                    value={this.state.imageUrl}
-                  />
+                  <div>
+                    <Form.Input
+                      disabled
+                      fluid
+                      label="Image URL"
+                      placeholder="Enter a URL for this step's first image"
+                      value={this.state.imageUrl}
+                      onChange={e => this.handelUrlChange(e)}
+                    />
+                    <br />
+                    <div className="ui fluid input">
+                      <input
+                        disabled="true"
+                        label="Select a File"
+                        type="file"
+                        id="step_image"
+                        name="step_image"
+                        accept="image/png, image/jpeg"
+                      />
+                    </div>
+                    <br />
+                  </div>
                 )}
               </Form.Group>
               <Form.Checkbox
@@ -111,7 +148,16 @@ class NewStepModalForm extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  return { createNewStep: newStep => dispatch(createNewStep(newStep)) };
+  return {
+    createNewStep: (newStep, imageFile) =>
+      dispatch(createNewStep(newStep, imageFile))
+  };
+
+  return {
+    uploadNewImage: (stepId, fileToUpload) => {
+      dispatch(uploadNewImage(stepId, fileToUpload));
+    }
+  };
 };
 
 export default withRouter(

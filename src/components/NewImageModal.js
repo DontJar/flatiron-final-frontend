@@ -85,13 +85,15 @@ class NewImageModal extends React.Component {
                   value={this.state.imageUrl}
                   onChange={e => this.handelUrlChange(e)}
                 />
-                <input
-                  label="Select a File"
-                  type="file"
-                  id="step_image"
-                  name="step_image"
-                  accept="image/png, image/jpeg"
-                />
+                <div className="ui fluid input">
+                  <input
+                    label="Select a File"
+                    type="file"
+                    id="step_image"
+                    name="step_image"
+                    accept="image/png, image/jpeg"
+                  />
+                </div>
               </Form.Group>
               <br />
               <Button type="submit">Submit</Button>

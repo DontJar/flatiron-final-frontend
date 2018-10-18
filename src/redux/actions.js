@@ -2,7 +2,6 @@ const URL = "http://localhost:3000/api/v1/";
 
 function fetchProjects() {
   return dispatch => {
-    // dispatch(loadingProjects());
     fetch(URL + "projects")
       .then(r => r.json())
       .then(json => dispatch(fetchedProjects(json)));
@@ -20,23 +19,6 @@ function createNewProject(newProject) {
       body: JSON.stringify({
         title: newProject.name,
         description: newProject.description
-      }),
-      headers: {
-        "Content-type": "application/json",
-        Accept: "application/json"
-      }
-    })
-      .then(r => r.json())
-      .then(json => dispatch(fetchProjects()));
-  };
-}
-
-function updateProject(projectInfo, id) {
-  return dispatch => {
-    fetch(`${URL}projects/${id}`, {
-      method: "PATCH",
-      body: JSON.stringify({
-        description: projectInfo.description
       }),
       headers: {
         "Content-type": "application/json",
@@ -70,7 +52,8 @@ function deleteImage(imageId) {
   };
 }
 
-function createNewStep(newStep) {
+function createNewStep(newStep, imageFile) {
+  // debugger;
   return dispatch => {
     fetch(`${URL}steps`, {
       method: "POST",
@@ -84,7 +67,12 @@ function createNewStep(newStep) {
       }
     })
       .then(r => r.json())
-      .then(json => dispatch(addNewImage(json.id, newStep.imageUrl)));
+      .then(
+        json =>
+          imageFile
+            ? dispatch(uploadNewImage(json.id, imageFile))
+            : dispatch(addNewImage(json.id, newStep.imageUrl))
+      );
   };
 }
 
@@ -100,7 +88,6 @@ function deleteStep(stepId) {
 }
 
 function addNewImage(stepId, imageUrl) {
-  // debugger;
   return dispatch => {
     fetch(`${URL}images`, {
       method: "POST",
@@ -129,12 +116,46 @@ function uploadNewImage(stepId, fileToUpload) {
       body: formData
     })
       .then(r => r.json())
-      .then(json => console.log(stepId, fileToUpload));
+      .then(dispatch(fetchProjects()));
   };
 }
 
-// t.string "url"
-// t.integer "step_id"
+function updateProject(projectInfo, id) {
+  return dispatch => {
+    fetch(`${URL}projects/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        description: projectInfo.description
+      }),
+      headers: {
+        "Content-type": "application/json",
+        Accept: "application/json"
+      }
+    })
+      .then(r => r.json())
+      .then(json => dispatch(fetchProjects()));
+  };
+}
+
+function setImageToCover(imageId) {
+  return dispatch => {
+    fetch(`${URL}images/${imageId}`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        is_cover: true
+      }),
+      headers: {
+        "Content-type": "application/json",
+        Accept: "application/json"
+      }
+    })
+      .then(r => r.json())
+      .then(_ => {
+        console.log(_);
+        dispatch(fetchProjects());
+      });
+  };
+}
 
 export {
   fetchProjects,
@@ -145,5 +166,6 @@ export {
   deleteStep,
   addNewImage,
   uploadNewImage,
-  deleteImage
+  deleteImage,
+  setImageToCover
 };

@@ -6,16 +6,18 @@ import {
   Container,
   Segment,
   Form,
-  TextArea
+  TextArea,
+  Card
 } from "semantic-ui-react";
 
 import { updateProject } from "../redux/actions";
+import ChangeCoverImageModal from "./ChangeCoverImageModal";
 import noImage from "../no-image.png";
 
 class ProjectCover extends React.Component {
   constructor() {
     super();
-    this.state = { editingDescription: false };
+    this.state = { editingDescription: false, coverImage: null };
   }
 
   handleEditClick() {
@@ -38,6 +40,12 @@ class ProjectCover extends React.Component {
     this.props.updateProject(this.state, this.props.project.id);
   }
 
+  // componentDidMount(
+  //   let coverImage
+  //   this.props.project.images.
+  // ---> this.props.project.images.find((image) => {image.is_cover})
+  // )
+
   render() {
     return (
       <div style={{ marginTop: "5em" }}>
@@ -53,18 +61,25 @@ class ProjectCover extends React.Component {
         </div> */}
           <div>
             <Segment>
-              {this.props.project.steps > 0 ? (
+              {this.props.project.images.find(image => image.is_cover) ? (
                 <Image
                   size="medium"
                   centered
-                  src={this.props.project.steps[0].images[0].url}
+                  src={
+                    this.props.project.images.find(image => image.is_cover).url
+                  }
                 />
               ) : (
                 <Image src={noImage} />
               )}
             </Segment>
           </div>
-          <Button size="tiny">Change Cover Image</Button>
+
+          {!this.props.project.images.find(image => image.is_cover) && (
+            <Card.Group centered itemsPerRow={3} style={{ margin: "auto" }}>
+              <ChangeCoverImageModal images={this.props.project.images} />
+            </Card.Group>
+          )}
           {!this.state.editingDescription ? (
             <div>
               Description: <strong>{this.props.project.description}</strong>
