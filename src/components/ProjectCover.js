@@ -40,12 +40,6 @@ class ProjectCover extends React.Component {
     this.props.updateProject(this.state, this.props.project.id);
   }
 
-  // componentDidMount(
-  //   let coverImage
-  //   this.props.project.images.
-  // ---> this.props.project.images.find((image) => {image.is_cover})
-  // )
-
   render() {
     return (
       <div style={{ marginTop: "5em" }}>
@@ -75,13 +69,19 @@ class ProjectCover extends React.Component {
             </Segment>
           </div>
 
-          {!this.props.project.images.find(image => image.is_cover) && (
-            <Card.Group centered itemsPerRow={3} style={{ margin: "auto" }}>
-              <ChangeCoverImageModal images={this.props.project.images} />
-            </Card.Group>
-          )}
+          <Card.Group centered itemsPerRow={3} style={{ margin: "auto" }}>
+            <ChangeCoverImageModal
+              images={this.props.project.images}
+              current_cover={
+                this.props.project.images.find(image => image.is_cover) &&
+                this.props.project.images.find(image => image.is_cover)
+              }
+            />
+          </Card.Group>
+
           {!this.state.editingDescription ? (
             <div>
+              <br />
               Description: <strong>{this.props.project.description}</strong>
             </div>
           ) : (

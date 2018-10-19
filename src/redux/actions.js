@@ -137,7 +137,25 @@ function updateProject(projectInfo, id) {
   };
 }
 
-function setImageToCover(imageId) {
+function unsetImageFromCover(oldCoverId) {
+  return dispatch => {
+    fetch(`${URL}images/${oldCoverId}`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        is_cover: false
+      }),
+      headers: {
+        "Content-type": "application/json",
+        Accept: "application/json"
+      }
+    })
+      .then(r => r.json())
+      .then(_ => dispatch(fetchProjects()));
+  };
+}
+
+function setImageToCover(imageId, oldCoverId) {
+  // debugger;
   return dispatch => {
     fetch(`${URL}images/${imageId}`, {
       method: "PATCH",
@@ -150,10 +168,12 @@ function setImageToCover(imageId) {
       }
     })
       .then(r => r.json())
-      .then(_ => {
-        console.log(_);
-        dispatch(fetchProjects());
-      });
+      .then(
+        _ =>
+          oldCoverId
+            ? dispatch(unsetImageFromCover(oldCoverId))
+            : dispatch(fetchProjects())
+      );
   };
 }
 

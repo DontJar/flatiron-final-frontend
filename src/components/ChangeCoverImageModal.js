@@ -8,10 +8,11 @@ import { setImageToCover } from "../redux/actions";
 import noImage from "../no-image.png";
 
 class ChangeCoverImageModal extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      modalOpen: false
+      modalOpen: false,
+      current_cover: props.current_cover
     };
   }
 
@@ -25,7 +26,10 @@ class ChangeCoverImageModal extends React.Component {
     this.setState({
       modalOpen: !this.state.modalOpen
     });
-    this.props.setImageToCover(e.target.id);
+    this.props.setImageToCover(e.target.id, this.state.current_cover.id);
+    this.setState({
+      current_cover: e.target.id
+    });
   }
 
   render() {
@@ -33,7 +37,9 @@ class ChangeCoverImageModal extends React.Component {
       <Modal
         trigger={
           <Button attached="bottom" onClick={() => this.toggleModal()}>
-            Select a Cover Image from your Current Project Images
+            {this.props.current_cover
+              ? "Change Cover Image"
+              : "Select a Cover Image from your Current Project Images"}
           </Button>
         }
         open={this.state.modalOpen}
