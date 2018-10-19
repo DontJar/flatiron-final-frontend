@@ -26,6 +26,18 @@
   background: ##c8c8c8;
 }
 
+.imageContainer {
+  display: inline-block;
+  position: relative;
+}
+
+.deleteBtn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  height: 20px;
+}
+
 /* @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

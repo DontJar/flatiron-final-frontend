@@ -39,14 +39,14 @@ class StepImage extends React.Component {
             <Image src={this.props.image.url} size="tiny" />
           </div>
         </a>
-        <div style={{ float: "right" }}>
+        {/* <div style={{ textAlign: "center", marginTop: "21m" }}>
           <Icon
             onClick={this.imageDelete}
             name="delete"
-            size="small"
+            // size="small"
             color="red"
           />
-        </div>
+        </div> */}
         <Confirm
           open={imageOpen}
           content="Confirm image delete"

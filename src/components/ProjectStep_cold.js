@@ -1,12 +1,12 @@
 import React from "react";
 import { Image, Button, Confirm, Card } from "semantic-ui-react";
-
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { connect } from "react-redux";
 
 import noImage from "../no-image.png";
-import { deleteStep } from "../redux/actions";
+import { deleteStep, deleteImage } from "../redux/actions";
 import StepImage from "./StepImage";
-import ShowStepImages from "./ShowStepImages";
 import NewImageModal from "./NewImageModal";
 
 class ProjectStep extends React.Component {
@@ -34,33 +34,53 @@ class ProjectStep extends React.Component {
     this.props.deleteStep(this.props.thisStep.id);
   };
 
+  imageDelete = () => {
+    this.setState({
+      imageOpen: true
+    });
+  };
+
+  handleImageDelete = () => {
+    this.setState({
+      open: false
+    });
+    this.props.deleteImage(this.props.image.id);
+  };
+
+  imageHandleCancel = () => {
+    console.log("clicked");
+    this.setState({
+      imageOpen: false
+    });
+  };
+
   render() {
     const { open } = this.state;
     return (
       <div>
-        {this.props.thisStep.images.length > 0 ? (
-          <a href={this.props.thisStep.images[0].url}>
-            <Image src={this.props.thisStep.images[0].url} />
-          </a>
+        {this.props.thisStep.images[0] ? (
+          <Carousel showIndicators={false} infiniteLoop={true} dynamicHeight>
+            {this.props.thisStep.images.map(image => (
+              <div>
+                <img src={image.url} onClick={this.imageDelete} />
+
+                <Confirm
+                  open={this.imageOpen}
+                  content="Confirm image delete"
+                  cancelButton="cancel"
+                  onCancel={this.imageHandleCancel}
+                  confirmButton="DELETE"
+                  onConfirm={this.handleImageDelete}
+                />
+              </div>
+            ))}
+          </Carousel>
         ) : (
           <Image centered size="tiny" src={noImage} />
         )}
-        {this.props.thisStep.images.length > 1 ? (
-          <div>
-            <ShowStepImages images={this.props.thisStep.images} />
-            <Card.Group centered itemsPerRow={3} style={{ margin: "auto" }}>
-              {this.props.thisStep.images.slice(1).map(image => (
-                <Card centered key={image.id}>
-                  <StepImage image={image} />
-                </Card>
-              ))}
-            </Card.Group>
-          </div>
-        ) : null}
         <div>In this step: {this.props.thisStep.description}</div>
 
         <Button onClick={this.deleteWarning}>Remove Step</Button>
-
         <Confirm
           open={open}
           content="Click to view or delete this image."
@@ -68,6 +88,7 @@ class ProjectStep extends React.Component {
           viewButton="view"
           confirmButton="DELETE"
           onCancel={this.handleCancel}
+          onView={this.handleView}
           onConfirm={this.handleConfirm}
         />
         <NewImageModal stepId={this.props.thisStep.id} />

@@ -44,9 +44,14 @@ class NewStepModalForm extends React.Component {
     });
   }
 
+  submitChecker(e) {
+    this.state.description.length < 1
+      ? alert("Please enter a description")
+      : this.submitHandler(e);
+  }
+
   submitHandler(e) {
     this.toggleModal();
-
     e.target.querySelector("#step_image").files.length > 0
       ? this.props.createNewStep(
           this.state,
@@ -73,7 +78,7 @@ class NewStepModalForm extends React.Component {
         open={this.state.modalOpen}
         content={
           <Segment inverted>
-            <Form inverted onSubmit={event => this.submitHandler(event)}>
+            <Form inverted onSubmit={event => this.submitChecker(event)}>
               <Form.Group widths="equal">
                 <Form.TextArea
                   fluid
