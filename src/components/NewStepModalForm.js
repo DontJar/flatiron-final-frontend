@@ -97,9 +97,12 @@ class NewStepModalForm extends React.Component {
                       onChange={e => this.handelUrlChange(e)}
                     />
                     <br />
-                    <div className="ui fluid input">
+                    <div className="filed">
+                      <label>
+                        Choose a file or take a picture <span>📷</span>
+                      </label>
+
                       <input
-                        label="Select a File"
                         type="file"
                         id="step_image"
                         name="step_image"
@@ -126,7 +129,8 @@ class NewStepModalForm extends React.Component {
                         type="file"
                         id="step_image"
                         name="step_image"
-                        accept="image/png, image/jpeg"
+                        accept="image/*;capture=camera"
+                        capture
                       />
                     </div>
                     <br />
@@ -157,7 +161,6 @@ const mapDispatchToProps = dispatch => {
     createNewStep: (newStep, imageFile) =>
       dispatch(createNewStep(newStep, imageFile))
   };
-
   return {
     uploadNewImage: (stepId, fileToUpload) => {
       dispatch(uploadNewImage(stepId, fileToUpload));

@@ -39,7 +39,7 @@ class NewProject extends React.Component {
     return (
       <div>
         <h2 style={{ display: "flex", justifyContent: "center" }}>
-          Start a new project
+          Start a new project!
         </h2>
         <div>
           <Input

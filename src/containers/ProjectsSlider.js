@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import ProjectCard from "../components/ProjectCard";
 
 const ProjectsSlider = state => {
-  // debugger;
+  const sliderHeight = window.screen.height - 30;
   return (
     <div>
       <NavLink to="/index">
@@ -16,7 +16,7 @@ const ProjectsSlider = state => {
       <div
         style={{
           overflow: "scroll",
-          maxHeight: "500px",
+          maxHeight: "550px",
           overflowX: "hidden"
         }}
       >

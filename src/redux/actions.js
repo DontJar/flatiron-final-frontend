@@ -1,4 +1,7 @@
-const URL = "http://localhost:3000/api/v1/";
+// const URL = "http://localhost:3000/api/v1/";
+
+// switcher-oo for mobile use
+const URL = "http://192.168.10.114:3000/api/v1/";
 
 function fetchProjects() {
   return dispatch => {

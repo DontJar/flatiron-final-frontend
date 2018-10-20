@@ -4,7 +4,9 @@ import { withRouter } from "react-router";
 import { connect } from "react-redux";
 
 import noImage from "../no-image.png";
-import deleteIcon from "../delete.png";
+// import deleteIcon from "../delete.png";
+import deleteX from "../deleteX.png";
+// import trash from "../trash.png";
 import { deleteImage } from "../redux/actions";
 
 class ShowStepImages extends React.Component {
@@ -44,15 +46,18 @@ class ShowStepImages extends React.Component {
       <Modal
         trigger={
           <Button attached="bottom" onClick={() => this.toggleModal()}>
-            Show More Images Related To This Step
+            Show all images related to this step
           </Button>
         }
         open={this.state.modalOpen}
         content={
           <Segment inverted>
             {this.props.images.map(image => (
-              <div class="ui raised card">
-                <div class="content" style={{ marginBottom: "2.5em" }}>
+              <div
+                className="ui raised card"
+                style={{ marginLeft: "auto", marginRight: "auto" }}
+              >
+                <div className="content" style={{ marginBottom: "2.5em" }}>
                   {image.url ? (
                     <div className="imageContainer" id={image.id}>
                       <img
@@ -63,7 +68,7 @@ class ShowStepImages extends React.Component {
                       {/* </a> */}
                       <img
                         className="deleteBtn"
-                        src={deleteIcon}
+                        src={deleteX}
                         alt="delete"
                         onClick={e => this.deleteWarning(e)}
                       />
@@ -79,7 +84,7 @@ class ShowStepImages extends React.Component {
                       />
                     </div>
                   ) : (
-                    <img src={noImage} class="ui image" />
+                    <img src={noImage} className="ui image" />
                   )}
                 </div>
               </div>

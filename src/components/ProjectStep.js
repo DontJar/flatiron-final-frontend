@@ -47,7 +47,6 @@ class ProjectStep extends React.Component {
         )}
         {this.props.thisStep.images.length > 1 ? (
           <div>
-            <ShowStepImages images={this.props.thisStep.images} />
             <Card.Group centered itemsPerRow={3} style={{ margin: "auto" }}>
               {this.props.thisStep.images.slice(1).map(image => (
                 <Card centered key={image.id}>
@@ -57,20 +56,25 @@ class ProjectStep extends React.Component {
             </Card.Group>
           </div>
         ) : null}
-        <div>In this step: {this.props.thisStep.description}</div>
+        <div style={{ marginLeft: "1em", marginRight: "1em" }}>
+          In this step: {this.props.thisStep.description}
+        </div>
+        <ShowStepImages images={this.props.thisStep.images} />
+        <br />
+        <div style={{ marginLeft: "1em", marginRight: "1em" }}>
+          <Button onClick={this.deleteWarning}>Remove Step</Button>
 
-        <Button onClick={this.deleteWarning}>Remove Step</Button>
-
-        <Confirm
-          open={open}
-          content="Click to view or delete this image."
-          cancelButton="cancel"
-          viewButton="view"
-          confirmButton="DELETE"
-          onCancel={this.handleCancel}
-          onConfirm={this.handleConfirm}
-        />
-        <NewImageModal stepId={this.props.thisStep.id} />
+          <Confirm
+            open={open}
+            content="Click to view or delete this image."
+            cancelButton="cancel"
+            viewButton="view"
+            confirmButton="DELETE"
+            onCancel={this.handleCancel}
+            onConfirm={this.handleConfirm}
+          />
+          <NewImageModal stepId={this.props.thisStep.id} />
+        </div>
         <br />
       </div>
     );

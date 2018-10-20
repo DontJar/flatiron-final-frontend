@@ -10,8 +10,10 @@ const ProjectCard = props => {
     <Card raised key={props.project.id}>
       <Link className="item" to={`/projects/${props.project.id}`}>
         <Card.Content>
-          {props.project.steps.length > 0 ? (
-            <Image src={props.project.steps[0].images[0].url} />
+          {props.project.images.find(image => image.is_cover) ? (
+            <Image
+              src={props.project.images.find(image => image.is_cover).url}
+            />
           ) : (
             <Image src={noImage} />
           )}

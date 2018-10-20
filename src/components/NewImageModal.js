@@ -36,17 +36,15 @@ class NewImageModal extends React.Component {
 
   submitHandler(e) {
     this.toggleModal();
-    {
-      e.target.querySelector("#step_image").files.length > 0
-        ? this.props.uploadNewImage(
-            this.props.stepId,
-            e.target.querySelector("#step_image").files[0]
-          )
-        : this.props.addNewImage(this.props.stepId, this.state.imageUrl);
-      this.setState({
-        imageUrl: ""
-      });
-    }
+    e.target.querySelector("#step_image").files.length > 0
+      ? this.props.uploadNewImage(
+          this.props.stepId,
+          e.target.querySelector("#step_image").files[0]
+        )
+      : this.props.addNewImage(this.props.stepId, this.state.imageUrl);
+    this.setState({
+      imageUrl: ""
+    });
   }
 
   onChangeFile() {
@@ -63,6 +61,7 @@ class NewImageModal extends React.Component {
       <Modal
         trigger={
           <Button
+            style={{ marginLeft: "1em", marginRight: "1em" }}
             onClick={() => this.toggleModal()}
             Icon
             name="camera"
@@ -80,18 +79,21 @@ class NewImageModal extends React.Component {
               <Form.Group widths="equal">
                 <Form.Input
                   fluid
-                  label="Enter Image URL"
+                  label="Enter image URL"
                   placeholder="Enter a URL for this step's first image"
                   value={this.state.imageUrl}
                   onChange={e => this.handelUrlChange(e)}
                 />
-                <div className="ui fluid input">
+
+                <div className="field">
+                  <label>
+                    Choose a file or take a picture <span>📷</span>
+                  </label>
                   <input
-                    label="Select a File"
                     type="file"
                     id="step_image"
                     name="step_image"
-                    accept="image/png, image/jpeg"
+                    accept="image/*;capture=camera"
                   />
                 </div>
               </Form.Group>

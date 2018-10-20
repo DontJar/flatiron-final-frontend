@@ -23,13 +23,21 @@ class ChangeCoverImageModal extends React.Component {
   }
 
   handleClick(e) {
+    // debugger;
     this.setState({
       modalOpen: !this.state.modalOpen
     });
-    this.props.setImageToCover(e.target.id, this.state.current_cover.id);
-    this.setState({
-      current_cover: e.target.id
-    });
+    if (this.state.current_cover === 0) {
+      this.props.setImageToCover(e.target.id);
+      this.setState({
+        current_cover: e.target.id
+      });
+    } else {
+      this.props.setImageToCover(e.target.id, this.state.current_cover.id);
+      this.setState({
+        current_cover: e.target.id
+      });
+    }
   }
 
   render() {
@@ -46,19 +54,23 @@ class ChangeCoverImageModal extends React.Component {
         content={
           <Segment inverted>
             {this.props.images.map(image => (
-              <div class="ui raised card">
-                <div class="content">
+              <div
+                className="ui raised card"
+                style={{ marginLeft: "auto", marginRight: "auto" }}
+              >
+                <div className="content">
                   {image.url ? (
                     <img
+                      alt=""
                       src={image.url}
-                      class="ui image"
+                      className="ui image"
                       onClick={e => {
                         this.handleClick(e);
                       }}
                       id={image.id}
                     />
                   ) : (
-                    <img src={noImage} class="ui image" />
+                    <img src={noImage} className="ui image" alt="" />
                   )}
                 </div>
               </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Input } from "semantic-ui-react";
+import { Card } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 import ProjectCard from "../components/ProjectCard";
@@ -7,8 +7,9 @@ import ProjectCard from "../components/ProjectCard";
 const ProjectsIndex = props => {
   return (
     <div style={{ "margin-top": "5em" }}>
-      <div>
-        <Input icon="search" placeholder="Search..." />
+      <div className="ui icon input" style={{ marginLeft: "1em" }}>
+        <input placeholder="Search..." type="text" />
+        <i aria-hidden="true" className="search icon" />
       </div>
       <Card.Group centered itemsPerRow={3} style={{ margin: "auto" }}>
         {props.projects &&

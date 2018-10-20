@@ -24,16 +24,14 @@ const NavBar = () => (
           <Dropdown.Item>Share a project(</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-      <Menu.Item
-        as="span"
-        header
-        style={{ flex: "auto", justifyContent: "flexEnd" }}
-      >
+
+      <Menu.Menu position="right" style={{ margin: ".5em" }} header>
         Loggr
         <NavLink to="/">
           <Image src={loggrLogo} style={{ height: "2em" }} />
         </NavLink>
-      </Menu.Item>
+      </Menu.Menu>
+      {/* </div> */}
     </Container>
   </Menu>
 );
