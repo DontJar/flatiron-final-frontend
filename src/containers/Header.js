@@ -27,7 +27,7 @@ const NavBar = () => (
 
       <Menu.Menu position="right" style={{ margin: ".5em" }} header>
         Loggr
-        <NavLink to="/">
+        <NavLink to="/index">
           <Image src={loggrLogo} style={{ height: "2em" }} />
         </NavLink>
       </Menu.Menu>

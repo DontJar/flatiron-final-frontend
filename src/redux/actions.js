@@ -1,6 +1,9 @@
 // const URL = "http://localhost:3000/api/v1/";
 
 // switcher-oo for mobile use
+
+import { Router, Route } from "react-router-dom";
+
 const URL = "http://192.168.10.114:3000/api/v1/";
 
 function fetchProjects() {
@@ -20,7 +23,7 @@ function createNewProject(newProject) {
     fetch(`${URL}projects`, {
       method: "POST",
       body: JSON.stringify({
-        title: newProject.name,
+        title: newProject.title,
         description: newProject.description
       }),
       headers: {

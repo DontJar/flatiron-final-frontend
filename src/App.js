@@ -21,7 +21,6 @@ class App extends Component {
       <div>
         <Header />
         <Switch>
-          <Route exact path="/" render={() => <Main />} />
           <Route exact path="/index" render={() => <ProjectsIndex />} />
           <Route
             path="/projects/:id"

@@ -38,7 +38,7 @@ class ProjectContainer extends React.Component {
     this.setState({
       open: false
     });
-    this.props.history.push("/");
+    this.props.history.push("/index");
     this.props.deleteProject(this.props.project.id);
   };
 

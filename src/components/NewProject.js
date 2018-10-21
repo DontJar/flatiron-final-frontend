@@ -42,20 +42,18 @@ class NewProject extends React.Component {
           Start a new project!
         </h2>
         <div>
-          <Input
-            fluid
-            style={{ marginTop: "5em" }}
-            placeholder="New project name..."
-            value={this.state.name}
-            onChange={e => this.handleNameChange(e)}
-          />
           <Form>
+            <Input
+              fluid
+              style={{ marginTop: "5em" }}
+              placeholder="New project name..."
+              value={this.state.name}
+              onChange={e => this.handleNameChange(e)}
+            />
             <TextArea
-              style={{ marginTop: "2em" }}
-              // fluid
-              autoHeight
+              style={{ marginTop: "2em", rows: "5" }}
               placeholder="Give your new project a description..."
-              value={this.state.description}
+              value={this.state.projectDecriptin}
               onChange={e => this.handleDescriptionChange(e)}
             />
             <Image
@@ -89,7 +87,11 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const mapStateToProps = state => {
+  return { projects: state.projects };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(NewProject);
