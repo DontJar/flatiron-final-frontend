@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 
 import { createNewProject } from "../redux/actions";
 import ProjectCard from "../components/ProjectCard";
-import plusPNG from "../plus.png";
+import plusPNG from "../plus_one.png";
 
 class ProjectsIndex extends React.Component {
   constructor() {

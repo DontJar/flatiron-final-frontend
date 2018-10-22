@@ -13,7 +13,11 @@ const ProjectCard = props => {
           {props.project.images.find(image => image.is_cover) ? (
             <Image
               style={{ borderRadius: "5px" }}
-              src={props.project.images.find(image => image.is_cover).url}
+              src={
+                props.project.images.find(
+                  image => image.id === props.project.cover_image_id
+                ).url
+              }
             />
           ) : (
             <Image src={noImage} />

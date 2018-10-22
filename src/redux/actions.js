@@ -4,7 +4,7 @@
 
 import { Router, Route } from "react-router-dom";
 
-const URL = "http://192.168.10.114:3000/api/v1/";
+const URL = "http://10.113.107.46:3000/api/v1/";
 
 function fetchProjects() {
   return dispatch => {
@@ -59,7 +59,6 @@ function deleteImage(imageId) {
 }
 
 function createNewStep(newStep, imageFile) {
-  // debugger;
   return dispatch => {
     fetch(`${URL}steps`, {
       method: "POST",
@@ -144,6 +143,7 @@ function updateProject(projectInfo, id) {
 }
 
 function unsetImageFromCover(oldCoverId) {
+  console.log(`old cover at unset ${oldCoverId}`);
   return dispatch => {
     fetch(`${URL}images/${oldCoverId}`, {
       method: "PATCH",
@@ -160,13 +160,12 @@ function unsetImageFromCover(oldCoverId) {
   };
 }
 
-function setImageToCover(imageId, oldCoverId) {
-  // debugger;
+function setImageToCover(imageId, projectId) {
   return dispatch => {
-    fetch(`${URL}images/${imageId}`, {
+    fetch(`${URL}projects/${projectId}`, {
       method: "PATCH",
       body: JSON.stringify({
-        is_cover: true
+        cover_image_id: imageId
       }),
       headers: {
         "Content-type": "application/json",
@@ -174,12 +173,7 @@ function setImageToCover(imageId, oldCoverId) {
       }
     })
       .then(r => r.json())
-      .then(
-        _ =>
-          oldCoverId
-            ? dispatch(unsetImageFromCover(oldCoverId))
-            : dispatch(fetchProjects())
-      );
+      .then(_ => dispatch(fetchProjects()));
   };
 }
 

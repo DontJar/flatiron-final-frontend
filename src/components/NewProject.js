@@ -3,7 +3,7 @@ import { Image, Input, Form, TextArea } from "semantic-ui-react";
 import { connect } from "react-redux";
 // import {withRouter} from 'react-router'
 
-import plusPNG from "../plus.png";
+import plusPNG from "../plus_too.svg";
 import { createNewProject } from "../redux/actions";
 
 class NewProject extends React.Component {

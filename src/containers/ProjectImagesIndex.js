@@ -6,7 +6,7 @@ import ProjectImagesIndex from "../components/ProjectCard";
 
 const ProjectsIndex = props => {
   return (
-    <div style={{ "margin-top": "5em" }}>
+    <div style={{ marginTop: "5em" }}>
       <div>
         <Input icon="search" placeholder="Search..." />
       </div>

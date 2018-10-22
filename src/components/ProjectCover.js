@@ -16,7 +16,9 @@ import noImage from "../no-image.png";
 class ProjectCover extends React.Component {
   constructor() {
     super();
-    this.state = { editingDescription: false, coverImage: null };
+    this.state = {
+      editingDescription: false
+    };
   }
 
   handleEditClick() {
@@ -46,27 +48,24 @@ class ProjectCover extends React.Component {
       month: "long",
       day: "numeric"
     };
-    // debugger;
+
     return (
       <div style={{ marginTop: "5em" }}>
         <Container fluid>
-          {/* TODO: implement the code below
-         <div>
-          Begun: <strong>{this.props.project.start_date}</strong>
-        </div> */}
-
           <div className="ui fluid card">
             <div className="content">
               <h2>
                 <strong>{this.props.project.title}</strong>
               </h2>
             </div>
-            {this.props.project.images.find(image => image.is_cover) ? (
+            {this.props.project.cover_image_id ? (
               <Image
                 size="medium"
                 centered
                 src={
-                  this.props.project.images.find(image => image.is_cover).url
+                  this.props.project.images.find(
+                    image => image.id === this.props.project.cover_image_id
+                  ).url
                 }
               />
             ) : (
@@ -121,63 +120,13 @@ class ProjectCover extends React.Component {
               </div>
             </div>
           </div>
-          {/*
-          <div>
-            <Segment>
-              {this.props.project.images.find(image => image.is_cover) ? (
-                <Image
-                  size="medium"
-                  centered
-                  src={
-                    this.props.project.images.find(image => image.is_cover).url
-                  }
-                />
-              ) : (
-                <Image src={noImage} />
-              )}
-            </Segment>
-          </div> */}
-
           <Card.Group centered itemsPerRow={3} style={{ margin: "auto" }}>
             <ChangeCoverImageModal
               images={this.props.project.images}
-              current_cover={
-                this.props.project.images.find(image => image.is_cover)
-                  ? this.props.project.images.find(image => image.is_cover)
-                  : 0
-              }
+              currentCover={this.props.project.cover_image_id}
+              projectId={this.props.project.id}
             />
           </Card.Group>
-          {/*
-          {!this.state.editingDescription ? (
-            <div>
-              <br />
-              Description: <strong>{this.props.project.description}</strong>
-            </div>
-          ) : (
-            <Form>
-              <TextArea
-                value={this.state.description}
-                onChange={e => this.handleDescriptionChange(e)}
-              />
-            </Form>
-          )}
-          {!this.state.editingDescription ? (
-            <Button size="tiny" onClick={() => this.handleEditClick()}>
-              Edit Description
-            </Button>
-          ) : (
-            <div>
-              <Button size="tiny" onClick={() => this.handleEditClick()}>
-                Cancel
-              </Button>
-              <Button
-                icon="save"
-                floated="right"
-                onClick={() => this.handleSaveClick()}
-              />
-            </div>
-          )} */}
         </Container>
         <br />
       </div>

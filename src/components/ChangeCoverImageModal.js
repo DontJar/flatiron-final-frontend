@@ -10,10 +10,12 @@ import noImage from "../no-image.png";
 class ChangeCoverImageModal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      modalOpen: false,
-      current_cover: props.current_cover
-    };
+    {
+      this.state = {
+        modalOpen: false,
+        currentCover: props.currentCover
+      };
+    }
   }
 
   toggleModal() {
@@ -23,21 +25,10 @@ class ChangeCoverImageModal extends React.Component {
   }
 
   handleClick(e) {
-    // debugger;
     this.setState({
       modalOpen: !this.state.modalOpen
     });
-    if (this.state.current_cover === 0) {
-      this.props.setImageToCover(e.target.id);
-      this.setState({
-        current_cover: e.target.id
-      });
-    } else {
-      this.props.setImageToCover(e.target.id, this.state.current_cover.id);
-      this.setState({
-        current_cover: e.target.id
-      });
-    }
+    this.props.setImageToCover(e.target.id, this.props.projectId);
   }
 
   render() {
@@ -45,7 +36,7 @@ class ChangeCoverImageModal extends React.Component {
       <Modal
         trigger={
           <Button attached="bottom" onClick={() => this.toggleModal()}>
-            {this.props.current_cover
+            {this.props.currentCover
               ? "Change Cover Image"
               : "Select a Cover Image from your Current Project Images"}
           </Button>
