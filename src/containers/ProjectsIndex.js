@@ -10,6 +10,7 @@ import {
   TextArea
 } from "semantic-ui-react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router";
 
 import { createNewProject } from "../redux/actions";
 import ProjectCard from "../components/ProjectCard";
@@ -45,7 +46,7 @@ class ProjectsIndex extends React.Component {
   }
 
   submitHandler() {
-    this.props.createNewProject({
+    this.props.createNewProject(this.props.history.push, {
       title: this.state.projectName,
       description: this.state.projectDecription
     });
@@ -143,11 +144,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createNewProject: newProject => dispatch(createNewProject(newProject))
+    createNewProject: (pushFunct, newProject) =>
+      dispatch(createNewProject(pushFunct, newProject))
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProjectsIndex);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(ProjectsIndex)
+);

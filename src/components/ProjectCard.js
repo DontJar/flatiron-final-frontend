@@ -10,7 +10,7 @@ const ProjectCard = props => {
     <Card raised key={props.project.id} style={{ borderRadius: "15px" }}>
       <Link className="item" to={`/projects/${props.project.id}`}>
         <Card.Content>
-          {props.project.images.find(image => image.is_cover) ? (
+          {props.project.cover_image_id ? (
             <Image
               style={{ borderRadius: "5px" }}
               src={

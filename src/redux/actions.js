@@ -18,7 +18,7 @@ function fetchedProjects(projects) {
   return { type: "UPDATE_STORE_WITH_ALL_PROJECTS", projects };
 }
 
-function createNewProject(newProject) {
+function createNewProject(pushFunct, newProject) {
   return dispatch => {
     fetch(`${URL}projects`, {
       method: "POST",
@@ -32,7 +32,10 @@ function createNewProject(newProject) {
       }
     })
       .then(r => r.json())
-      .then(json => dispatch(fetchProjects()));
+      .then(json => {
+        pushFunct(`/projects/${json.id}`);
+        dispatch(fetchProjects());
+      });
   };
 }
 
