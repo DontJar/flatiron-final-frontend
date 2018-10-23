@@ -56,8 +56,14 @@ class ProjectStep extends React.Component {
             </Card.Group>
           </div>
         ) : null}
-        <div style={{ marginLeft: "1em", marginRight: "1em" }}>
-          In this step: {this.props.thisStep.description}
+        <div
+          className="ui segment"
+          style={{ marginLeft: "1em", marginRight: "1em" }}
+        >
+          <div class="ui top left attached label">
+            Step {this.props.stepNumber}:
+          </div>
+          <p>{this.props.thisStep.description}</p>
         </div>
         <ShowStepImages images={this.props.thisStep.images} />
         <br />

@@ -7,12 +7,17 @@ import noImage from "../no-image.png";
 const ProjectCard = props => {
   // debugger;
   return (
-    <Card raised key={props.project.id} style={{ borderRadius: "15px" }}>
+    <Card raised key={props.project.id}>
       <Link className="item" to={`/projects/${props.project.id}`}>
         <Card.Content>
           {props.project.cover_image_id ? (
             <Image
-              style={{ borderRadius: "5px" }}
+              style={{
+                borderRadius: "5px",
+                objectFit: "cover",
+                width: "275px",
+                height: "275px"
+              }}
               src={
                 props.project.images.find(
                   image => image.id === props.project.cover_image_id
@@ -20,13 +25,21 @@ const ProjectCard = props => {
               }
             />
           ) : (
-            <Image src={noImage} />
+            <Image src={noImage} style={{ marginTop: "5em" }} />
           )}
           <br />
 
-          <Card.Description style={{ textAlign: "center" }}>
-            {props.project.title}
-          </Card.Description>
+          <div
+            className="content"
+            style={{ textAlign: "center", textAlign: "center" }}
+          >
+            <div
+              className="ui center aligned header"
+              style={{ marginTop: ".25em" }}
+            >
+              {props.project.title}
+            </div>
+          </div>
           <br />
         </Card.Content>
       </Link>

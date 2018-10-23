@@ -46,7 +46,7 @@ class ShowStepImages extends React.Component {
       <Modal
         trigger={
           <Button attached="bottom" onClick={() => this.toggleModal()}>
-            Show all images related to this step
+            Show/Delete images related to this step
           </Button>
         }
         open={this.state.modalOpen}
@@ -73,6 +73,7 @@ class ShowStepImages extends React.Component {
                         onClick={e => this.deleteWarning(e)}
                       />
                       <Confirm
+                        style={{ marginTop: "15em" }}
                         open={open}
                         imageTarget={image.id}
                         id={image.id}

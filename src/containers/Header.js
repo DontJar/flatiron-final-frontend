@@ -2,6 +2,7 @@ import React from "react";
 import { Dropdown, Image, Icon, Menu, Container } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 
+import NewProject from "../components/NewProject";
 import loggrLogo from "../log.svg";
 
 const NavBar = () => (
@@ -10,18 +11,8 @@ const NavBar = () => (
       <Dropdown item icon="bars" simple>
         <Dropdown.Menu>
           <Dropdown.Item>
-            <NavLink to="/index">
-              <Dropdown.Header>All Projects</Dropdown.Header>
-            </NavLink>
+            <NewProject />
           </Dropdown.Item>
-          <Dropdown.Item>
-            <Icon name="dropdown" />
-            <span className="text">New</span>
-            <Dropdown.Menu>
-              <Dropdown.Item>New Project</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown.Item>
-          <Dropdown.Item>Share a project(</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
 

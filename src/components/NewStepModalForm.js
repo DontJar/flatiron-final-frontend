@@ -98,15 +98,13 @@ class NewStepModalForm extends React.Component {
                     />
                     <br />
                     <div className="filed">
-                      <label>
-                        Choose a file or take a picture <span>📷</span>
-                      </label>
+                      <label>Choose a file or take a picture</label>
 
                       <input
                         type="file"
                         id="step_image"
                         name="step_image"
-                        accept="image/png, image/jpeg"
+                        accept="image/*"
                       />
                     </div>
                     <br />
@@ -129,7 +127,7 @@ class NewStepModalForm extends React.Component {
                         type="file"
                         id="step_image"
                         name="step_image"
-                        accept="image/*;capture=camera"
+                        accept="image/*"
                         capture
                       />
                     </div>

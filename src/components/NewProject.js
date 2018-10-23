@@ -1,7 +1,15 @@
 import React from "react";
-import { Image, Input, Form, TextArea } from "semantic-ui-react";
+import {
+  Image,
+  Input,
+  Form,
+  TextArea,
+  Modal,
+  Segment,
+  Button
+} from "semantic-ui-react";
 import { connect } from "react-redux";
-// import {withRouter} from 'react-router'
+import { withRouter } from "react-router";
 
 import plusPNG from "../plus_too.svg";
 import { createNewProject } from "../redux/actions";
@@ -10,88 +18,98 @@ class NewProject extends React.Component {
   constructor() {
     super();
     this.state = {
-      name: "",
-      description: ""
+      modalOpen: false,
+      projectName: "",
+      projectDescription: ""
     };
   }
 
-  handleNameChange(e) {
+  toggleModal() {
     this.setState({
-      name: e.target.value
+      modalOpen: !this.state.modalOpen
     });
   }
 
-  handleDescriptionChange(e) {
+  handelNameChange(e) {
     this.setState({
-      description: e.target.value
+      projectName: e.target.value
     });
   }
 
-  handleNewClick() {
-    this.props.createNewProject(this.state);
+  handelDescriptionChange(e) {
     this.setState({
-      name: "",
-      description: ""
+      projectDecription: e.target.value
+    });
+  }
+
+  submitHandler() {
+    this.props.createNewProject(this.props.history.push, {
+      title: this.state.projectName,
+      description: this.state.projectDecription
+    });
+    this.setState({
+      modalOpen: false,
+      projectName: "",
+      projectDecription: ""
     });
   }
 
   render() {
     return (
-      <div>
-        <h2 style={{ display: "flex", justifyContent: "center" }}>
-          Start a new project!
-        </h2>
-        <div>
-          <Form>
-            <Input
-              fluid
-              style={{ marginTop: "5em" }}
-              placeholder="New project name..."
-              value={this.state.name}
-              onChange={e => this.handleNameChange(e)}
-            />
-            <TextArea
-              style={{ marginTop: "2em", rows: "5" }}
-              placeholder="Give your new project a description..."
-              value={this.state.projectDecriptin}
-              onChange={e => this.handleDescriptionChange(e)}
-            />
-            <Image
-              size="tiny"
-              style={{
-                position: "absolute",
-                marginTop: "3em",
-                left: "33.25%"
-              }}
-              src={plusPNG}
-              onClick={() => {
-                if (this.state.name.length === 0) {
-                  alert("Please enter a project name");
-                } else if (this.state.description.length === 0) {
-                  alert("Please enter a project description");
-                } else {
-                  this.handleNewClick();
-                }
-              }}
-            />
-          </Form>
-        </div>
-      </div>
+      <Modal
+        trigger={
+          <div>
+            <p onClick={() => this.toggleModal()}>Start a new project</p>
+          </div>
+        }
+        open={this.state.modalOpen}
+        content={
+          <Segment inverted>
+            <Form inverted onSubmit={event => this.submitHandler(event)}>
+              <Form.Group widths="equal">
+                <Form.Input
+                  fluid
+                  label="Name your new project"
+                  placeholder="Project name"
+                  value={this.state.projectName}
+                  onChange={e => this.handelNameChange(e)}
+                />
+                <div className="field">
+                  <label>Describe your project</label>
+                  <div class="ui fluid input">
+                    <textarea
+                      placeholder="Project description"
+                      value={this.state.projectDecription}
+                      onChange={e => this.handelDescriptionChange(e)}
+                    />
+                  </div>
+                </div>
+              </Form.Group>
+              <br />
+              <Button type="submit">Submit</Button>
+              <Button
+                icon="delete"
+                floated="right"
+                onClick={() => this.toggleModal()}
+              />
+            </Form>
+          </Segment>
+        }
+      />
     );
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    createNewProject: newProject => dispatch(createNewProject(newProject))
+    createNewProject: (pushFunct, newProject) =>
+      dispatch(createNewProject(pushFunct, newProject))
   };
 };
 
-const mapStateToProps = state => {
-  return { projects: state.projects };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NewProject);
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(NewProject)
+);

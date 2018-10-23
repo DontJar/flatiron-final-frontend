@@ -93,7 +93,7 @@ class NewImageModal extends React.Component {
                     type="file"
                     id="step_image"
                     name="step_image"
-                    accept="image/*;capture=camera"
+                    accept="image/*"
                   />
                 </div>
               </Form.Group>

@@ -62,16 +62,18 @@ class ProjectContainer extends React.Component {
                 this.props.project.steps &&
                 this.props.project.steps.map(step => (
                   <div key={step.id}>
-                    <ProjectStep thisStep={step} />
+                    <ProjectStep
+                      thisStep={step}
+                      stepNumber={this.props.project.steps.indexOf(step) + 1}
+                    />
                     <Divider />
                   </div>
                 ))}
               <br />
               <NewStepModalForm />
               <br />
-              <Button floated="right" onClick={this.deleteWarning} color="red">
+              {/* <Button floated="right" onClick={this.deleteWarning} color="red">
                 <Icon name="delete" />
-                Delete this Project
               </Button>
               <Confirm
                 open={open}
@@ -80,7 +82,7 @@ class ProjectContainer extends React.Component {
                 confirmButton="DELETE"
                 onCancel={this.handleCancel}
                 onConfirm={this.handleConfirm}
-              />
+              /> */}
             </div>
           </div>
         )}

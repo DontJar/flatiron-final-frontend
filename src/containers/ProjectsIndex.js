@@ -57,10 +57,16 @@ class ProjectsIndex extends React.Component {
     });
   }
 
+  searchChange(e) {
+    this.setState({
+      searchTerm: e.target.value
+    });
+  }
+
   render() {
     return (
       <div>
-        <div style={{ "margin-top": "4em" }}>
+        <div style={{ "margin-top": "4em", marginBottom: "6.5em" }}>
           <div
             className="ui fluid icon input"
             style={{ marginLeft: "1em", marginRight: "1em" }}
@@ -71,15 +77,21 @@ class ProjectsIndex extends React.Component {
               }}
               type="text"
               placeholder="Search..."
+              value={this.state.searchTerm}
+              onChange={e => this.searchChange(e)}
             />
             <i class="search icon" />
             <i aria-hidden="true" className="search icon" />
           </div>
           <Card.Group centered itemsPerRow={2} style={{ margin: "auto" }}>
             {this.props.projects &&
-              this.props.projects.map(project => (
-                <ProjectCard project={project} />
-              ))}
+              this.props.projects
+                .filter(project =>
+                  project.title
+                    .toLowerCase()
+                    .includes(this.state.searchTerm.toLowerCase())
+                )
+                .map(project => <ProjectCard project={project} />)}
           </Card.Group>
         </div>
         <Modal

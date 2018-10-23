@@ -6,10 +6,13 @@ import {
   Container,
   Form,
   TextArea,
-  Card
+  Card,
+  Icon,
+  Confirm
 } from "semantic-ui-react";
+import { withRouter } from "react-router";
 
-import { updateProject } from "../redux/actions";
+import { updateProject, deleteProject } from "../redux/actions";
 import ChangeCoverImageModal from "./ChangeCoverImageModal";
 import noImage from "../no-image.png";
 
@@ -17,7 +20,8 @@ class ProjectCover extends React.Component {
   constructor() {
     super();
     this.state = {
-      editingDescription: false
+      editingDescription: false,
+      open: false
     };
   }
 
@@ -41,6 +45,26 @@ class ProjectCover extends React.Component {
     this.props.updateProject(this.state, this.props.project.id);
   }
 
+  deleteWarning = () => {
+    this.setState({
+      open: true
+    });
+  };
+
+  handleCancel = () => {
+    this.setState({
+      open: false
+    });
+  };
+
+  handleConfirm = () => {
+    this.setState({
+      open: false
+    });
+    this.props.history.push("/index");
+    this.props.deleteProject(this.props.project.id);
+  };
+
   render() {
     const options = {
       weekday: "long",
@@ -48,7 +72,7 @@ class ProjectCover extends React.Component {
       month: "long",
       day: "numeric"
     };
-
+    const { open } = this.state;
     return (
       <div style={{ marginTop: "5em" }}>
         <Container fluid>
@@ -90,13 +114,35 @@ class ProjectCover extends React.Component {
                 </Form>
               )}
               {!this.state.editingDescription ? (
-                <Button
-                  size="tiny"
-                  floated="right"
-                  onClick={() => this.handleEditClick()}
-                >
-                  Edit description
-                </Button>
+                <div>
+                  <div>
+                    <Button
+                      floated="right"
+                      size="tiny"
+                      onClick={this.deleteWarning}
+                      color="red"
+                    >
+                      <Icon name="delete" />
+                    </Button>
+                    <Confirm
+                      open={open}
+                      content="Confirm that you would like to delete this entire project this step."
+                      cancelButton="cancel"
+                      confirmButton="DELETE"
+                      onCancel={this.handleCancel}
+                      onConfirm={this.handleConfirm}
+                    />
+                  </div>
+                  <div>
+                    <Button
+                      size="tiny"
+                      floated="right"
+                      onClick={() => this.handleEditClick()}
+                    >
+                      Edit description
+                    </Button>
+                  </div>
+                </div>
               ) : (
                 <div>
                   <Button size="tiny" onClick={() => this.handleEditClick()}>
@@ -137,11 +183,14 @@ class ProjectCover extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     updateProject: (projecDetails, projectId) =>
-      dispatch(updateProject(projecDetails, projectId))
+      dispatch(updateProject(projecDetails, projectId)),
+    deleteProject: projectId => dispatch(deleteProject(projectId))
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(ProjectCover);
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(ProjectCover)
+);

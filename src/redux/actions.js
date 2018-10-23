@@ -1,9 +1,7 @@
-// const URL = "http://localhost:3000/api/v1/";
-
-// switcher-oo for mobile use
-
 import { Router, Route } from "react-router-dom";
 
+// const URL = "http://localhost:3000/api/v1/";
+// switcher-oo for mobile use
 const URL = "http://10.113.107.46:3000/api/v1/";
 
 function fetchProjects() {
