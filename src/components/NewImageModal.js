@@ -63,7 +63,7 @@ class NewImageModal extends React.Component {
           <Button
             style={{ marginLeft: "1em", marginRight: "1em" }}
             onClick={() => this.toggleModal()}
-            Icon
+            // icon="camera"
             name="camera"
             floated="right"
             color="blue"
@@ -86,9 +86,7 @@ class NewImageModal extends React.Component {
                 />
 
                 <div className="field">
-                  <label>
-                    Choose a file or take a picture <span>📷</span>
-                  </label>
+                  <label>Choose a file or take a picture</label>
                   <input
                     type="file"
                     id="step_image"

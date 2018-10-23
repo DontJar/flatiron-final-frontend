@@ -1,14 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  Button,
-  Segment,
-  Dimmer,
-  Loader,
-  Confirm,
-  Divider,
-  Icon
-} from "semantic-ui-react";
+import { Segment, Dimmer, Loader, Divider } from "semantic-ui-react";
 import { withRouter } from "react-router";
 import { deleteProject } from "../redux/actions";
 
@@ -43,7 +35,6 @@ class ProjectContainer extends React.Component {
   };
 
   render() {
-    const { open } = this.state;
     return (
       <div>
         {!this.props.project ? (
@@ -72,17 +63,6 @@ class ProjectContainer extends React.Component {
               <br />
               <NewStepModalForm />
               <br />
-              {/* <Button floated="right" onClick={this.deleteWarning} color="red">
-                <Icon name="delete" />
-              </Button>
-              <Confirm
-                open={open}
-                content="Confirm that you would like to delete this entire project this step."
-                cancelButton="cancel"
-                confirmButton="DELETE"
-                onCancel={this.handleCancel}
-                onConfirm={this.handleConfirm}
-              /> */}
             </div>
           </div>
         )}

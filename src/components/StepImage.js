@@ -36,17 +36,19 @@ class StepImage extends React.Component {
       <Card.Content>
         <a href={this.props.image.url}>
           <div>
-            <Image src={this.props.image.url} size="tiny" />
+            <Image
+              src={this.props.image.url}
+              size="tiny"
+              style={{
+                borderRadius: "5px",
+                objectFit: "cover",
+                width: "100px",
+                height: "100px"
+              }}
+            />
           </div>
         </a>
-        {/* <div style={{ textAlign: "center", marginTop: "21m" }}>
-          <Icon
-            onClick={this.imageDelete}
-            name="delete"
-            // size="small"
-            color="red"
-          />
-        </div> */}
+
         <Confirm
           open={imageOpen}
           content="Confirm image delete"

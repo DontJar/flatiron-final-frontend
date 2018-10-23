@@ -10,7 +10,10 @@ const ProjectCard = props => {
     <Card raised key={props.project.id}>
       <Link className="item" to={`/projects/${props.project.id}`}>
         <Card.Content>
-          {props.project.cover_image_id ? (
+          {props.project.cover_image_id &&
+          props.project.images.find(
+            image => image.id === props.project.cover_image_id
+          ) !== undefined ? (
             <Image
               style={{
                 borderRadius: "5px",
@@ -29,10 +32,7 @@ const ProjectCard = props => {
           )}
           <br />
 
-          <div
-            className="content"
-            style={{ textAlign: "center", textAlign: "center" }}
-          >
+          <div className="content" style={{ textAlign: "center" }}>
             <div
               className="ui center aligned header"
               style={{ marginTop: ".25em" }}

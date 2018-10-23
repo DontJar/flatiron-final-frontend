@@ -1,18 +1,20 @@
-import React from "react";
-import { Card, Modal, Button, Segment, Form } from "semantic-ui-react";
+import React, { Component } from "react";
+import { Modal, Button, Segment, Form } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
-import { createNewProject } from "../redux/actions";
-import ProjectCard from "../components/ProjectCard";
+import haveIdea from "../idea.png";
+import logProgress from "../logProgress.png";
+import enjoyWork from "../enjoyWork.png";
 import plusPNG from "../plus_one.png";
+import { createNewProject } from "../redux/actions";
 
-class ProjectsIndex extends React.Component {
+class About extends Component {
   constructor() {
     super();
     this.state = {
       modalOpen: false,
-      searchTerm: "",
+
       projectName: "",
       projectDecription: ""
     };
@@ -54,53 +56,36 @@ class ProjectsIndex extends React.Component {
     });
   }
 
-  searchChange(e) {
-    this.setState({
-      searchTerm: e.target.value
-    });
-  }
-
   render() {
-    this.props.projects.length < 1 && this.props.history.push("/about");
     return (
-      <div>
-        <div style={{ marginTop: "4em", marginBottom: "6.5em" }}>
-          <div
-            className="ui fluid icon input"
-            style={{ marginLeft: "1em", marginRight: "1em" }}
-          >
-            <input
-              style={{
-                borderRadius: "15px"
-              }}
-              type="text"
-              placeholder="Search..."
-              value={this.state.searchTerm}
-              onChange={e => this.searchChange(e)}
-            />
-            <i className="search icon" />
-            <i aria-hidden="true" className="search icon" />
-          </div>
-          <Card.Group centered itemsPerRow={2} style={{ margin: "auto" }}>
-            {this.props.projects &&
-              this.props.projects
-                .filter(project =>
-                  project.title
-                    .toLowerCase()
-                    .includes(this.state.searchTerm.toLowerCase())
-                )
-                .map(project => (
-                  <ProjectCard project={project} key={project.id} />
-                ))}
-          </Card.Group>
-        </div>
+      <div style={{ marginTop: "6em", marginLeft: "4em" }}>
+        <img
+          src={haveIdea}
+          style={{ height: "7em", marginLeft: "2em" }}
+          alt="start"
+        />
+        <div>Sart something new</div>
+        <img
+          src={logProgress}
+          style={{ height: "7em", marginTop: "3em" }}
+          alt="log"
+        />
+        <div>Log your progress along the way</div>
+        <img
+          src={enjoyWork}
+          style={{ height: "7em", marginTop: "3em" }}
+          alt="enjoy"
+        />
+        <div>Enjoy all your hard work</div>
 
         <Modal
           trigger={
             <div>
+              <div className="arrow bounce" />
+
               <img
-                alt="addProject"
                 onClick={() => this.toggleModal()}
+                alt="arrow"
                 style={{
                   position: "fixed",
                   bottom: "15px",
@@ -150,12 +135,6 @@ class ProjectsIndex extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    projects: state.projects
-  };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
     createNewProject: (pushFunct, newProject) =>
@@ -165,7 +144,7 @@ const mapDispatchToProps = dispatch => {
 
 export default withRouter(
   connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
-  )(ProjectsIndex)
+  )(About)
 );

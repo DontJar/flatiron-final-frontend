@@ -7,7 +7,6 @@ import {
   Form,
   TextArea,
   Card,
-  Icon,
   Confirm
 } from "semantic-ui-react";
 import { withRouter } from "react-router";
@@ -73,6 +72,7 @@ class ProjectCover extends React.Component {
       day: "numeric"
     };
     const { open } = this.state;
+    // debugger;
     return (
       <div style={{ marginTop: "5em" }}>
         <Container fluid>
@@ -82,7 +82,10 @@ class ProjectCover extends React.Component {
                 <strong>{this.props.project.title}</strong>
               </h2>
             </div>
-            {this.props.project.cover_image_id ? (
+            {this.props.project.cover_image_id &&
+            this.props.project.images.find(
+              image => image.id === this.props.project.cover_image_id
+            ) !== undefined ? (
               <Image
                 size="medium"
                 centered
@@ -115,15 +118,18 @@ class ProjectCover extends React.Component {
               )}
               {!this.state.editingDescription ? (
                 <div>
-                  <div>
-                    <Button
-                      floated="right"
-                      size="tiny"
-                      onClick={this.deleteWarning}
-                      color="red"
-                    >
-                      <Icon name="delete" />
-                    </Button>
+                  <Button
+                    floated="right"
+                    size="tiny"
+                    onClick={this.deleteWarning}
+                    color="red"
+                    // style={{
+                    //   position: "absolute",
+                    //   right: "1em",
+                    //   marginTop: ".25"
+                    // }}
+                  >
+                    <strong>X</strong>
                     <Confirm
                       open={open}
                       content="Confirm that you would like to delete this entire project this step."
@@ -132,16 +138,19 @@ class ProjectCover extends React.Component {
                       onCancel={this.handleCancel}
                       onConfirm={this.handleConfirm}
                     />
-                  </div>
-                  <div>
-                    <Button
-                      size="tiny"
-                      floated="right"
-                      onClick={() => this.handleEditClick()}
-                    >
-                      Edit description
-                    </Button>
-                  </div>
+                  </Button>
+                  <Button
+                    size="tiny"
+                    floated="right"
+                    onClick={() => this.handleEditClick()}
+                    // style={{
+                    //   position: "absolute",
+                    //   right: "1em",
+                    //   marginTop: "-3em"
+                    // }}
+                  >
+                    Edit
+                  </Button>
                 </div>
               ) : (
                 <div>

@@ -1,5 +1,3 @@
-import { Router, Route } from "react-router-dom";
-
 // const URL = "http://localhost:3000/api/v1/";
 // switcher-oo for mobile use
 const URL = "http://10.113.107.46:3000/api/v1/";
@@ -73,12 +71,14 @@ function createNewStep(newStep, imageFile) {
       }
     })
       .then(r => r.json())
-      .then(
-        json =>
-          imageFile
-            ? dispatch(uploadNewImage(json.id, imageFile))
-            : dispatch(addNewImage(json.id, newStep.imageUrl))
-      );
+      .then(json => {
+        // console.log(
+        //   `createNewStep - newStep: ${newStep} imageFile: ${imageFile} ${json}`
+        // );
+        imageFile
+          ? dispatch(uploadNewImage(json.id, imageFile))
+          : dispatch(addNewImage(json.id, newStep.imageUrl));
+      });
   };
 }
 
@@ -122,7 +122,13 @@ function uploadNewImage(stepId, fileToUpload) {
       body: formData
     })
       .then(r => r.json())
-      .then(dispatch(fetchProjects()));
+      // .then(json => console.log(json));
+      .then(json => {
+        // console.log(
+        //   `uploadNewImage - stepid: ${stepId} fileToUpload: ${fileToUpload} ${json}`
+        // );
+        dispatch(fetchProjects());
+      });
   };
 }
 
@@ -140,24 +146,6 @@ function updateProject(projectInfo, id) {
     })
       .then(r => r.json())
       .then(json => dispatch(fetchProjects()));
-  };
-}
-
-function unsetImageFromCover(oldCoverId) {
-  console.log(`old cover at unset ${oldCoverId}`);
-  return dispatch => {
-    fetch(`${URL}images/${oldCoverId}`, {
-      method: "PATCH",
-      body: JSON.stringify({
-        is_cover: false
-      }),
-      headers: {
-        "Content-type": "application/json",
-        Accept: "application/json"
-      }
-    })
-      .then(r => r.json())
-      .then(_ => dispatch(fetchProjects()));
   };
 }
 

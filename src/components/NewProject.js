@@ -1,17 +1,8 @@
 import React from "react";
-import {
-  Image,
-  Input,
-  Form,
-  TextArea,
-  Modal,
-  Segment,
-  Button
-} from "semantic-ui-react";
+import { Form, Modal, Segment, Button, Dropdown } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
-import plusPNG from "../plus_too.svg";
 import { createNewProject } from "../redux/actions";
 
 class NewProject extends React.Component {
@@ -42,6 +33,12 @@ class NewProject extends React.Component {
     });
   }
 
+  submitChecker() {
+    this.state.projectName.length < 1
+      ? alert("Please enter a project title")
+      : this.submitHandler();
+  }
+
   submitHandler() {
     this.props.createNewProject(this.props.history.push, {
       title: this.state.projectName,
@@ -58,14 +55,16 @@ class NewProject extends React.Component {
     return (
       <Modal
         trigger={
-          <div>
-            <p onClick={() => this.toggleModal()}>Start a new project</p>
-          </div>
+          <Dropdown.Item
+            onClick={() => this.toggleModal()}
+            text="Create new project"
+            icon="edit"
+          />
         }
         open={this.state.modalOpen}
         content={
           <Segment inverted>
-            <Form inverted onSubmit={event => this.submitHandler(event)}>
+            <Form inverted onSubmit={event => this.submitChecker(event)}>
               <Form.Group widths="equal">
                 <Form.Input
                   fluid
@@ -76,7 +75,7 @@ class NewProject extends React.Component {
                 />
                 <div className="field">
                   <label>Describe your project</label>
-                  <div class="ui fluid input">
+                  <div className="ui fluid input">
                     <textarea
                       placeholder="Project description"
                       value={this.state.projectDecription}

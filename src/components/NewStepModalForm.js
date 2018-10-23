@@ -81,7 +81,7 @@ class NewStepModalForm extends React.Component {
             <Form inverted onSubmit={event => this.submitChecker(event)}>
               <Form.Group widths="equal">
                 <Form.TextArea
-                  fluid
+                  fluid=""
                   label="Add a new step"
                   placeholder="Enter a description for this step"
                   value={this.state.description}
@@ -97,14 +97,14 @@ class NewStepModalForm extends React.Component {
                       onChange={e => this.handelUrlChange(e)}
                     />
                     <br />
-                    <div className="filed">
+                    <div className="field">
                       <label>Choose a file or take a picture</label>
-
                       <input
                         type="file"
                         id="step_image"
                         name="step_image"
                         accept="image/*"
+                        capture
                       />
                     </div>
                     <br />
@@ -120,10 +120,10 @@ class NewStepModalForm extends React.Component {
                       onChange={e => this.handelUrlChange(e)}
                     />
                     <br />
-                    <div className="ui fluid input">
+                    <div className="field">
+                      <label>Choose a file or take a picture</label>
                       <input
-                        disabled="true"
-                        label="Select a File"
+                        disabled
                         type="file"
                         id="step_image"
                         name="step_image"
@@ -137,7 +137,7 @@ class NewStepModalForm extends React.Component {
               </Form.Group>
               <Form.Checkbox
                 label="No Image yet!"
-                value={this.state.isChecked}
+                // value={this.state.isChecked}
                 onChange={() => this.handleBoxClick()}
               />
               <Button type="submit">Submit</Button>

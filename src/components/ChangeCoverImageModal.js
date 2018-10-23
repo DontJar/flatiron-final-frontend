@@ -10,12 +10,11 @@ import noImage from "../no-image.png";
 class ChangeCoverImageModal extends React.Component {
   constructor(props) {
     super(props);
-    {
-      this.state = {
-        modalOpen: false,
-        currentCover: props.currentCover
-      };
-    }
+
+    this.state = {
+      modalOpen: false,
+      currentCover: props.currentCover
+    };
   }
 
   toggleModal() {
@@ -46,6 +45,7 @@ class ChangeCoverImageModal extends React.Component {
           <Segment inverted>
             {this.props.images.map(image => (
               <div
+                key={image.id}
                 className="ui raised card"
                 style={{ marginLeft: "auto", marginRight: "auto" }}
               >

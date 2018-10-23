@@ -40,7 +40,10 @@ class ProjectStep extends React.Component {
       <div>
         {this.props.thisStep.images.length > 0 ? (
           <a href={this.props.thisStep.images[0].url}>
-            <Image src={this.props.thisStep.images[0].url} />
+            <Image
+              src={this.props.thisStep.images[0].url}
+              style={{ margin: "auto" }}
+            />
           </a>
         ) : (
           <Image centered size="tiny" src={noImage} />
@@ -60,10 +63,12 @@ class ProjectStep extends React.Component {
           className="ui segment"
           style={{ marginLeft: "1em", marginRight: "1em" }}
         >
-          <div class="ui top left attached label">
+          <div className="ui top left attached label">
             Step {this.props.stepNumber}:
           </div>
-          <p>{this.props.thisStep.description}</p>
+          <p style={{ textIndent: "50px" }}>
+            {this.props.thisStep.description}
+          </p>
         </div>
         <ShowStepImages images={this.props.thisStep.images} />
         <br />
@@ -74,7 +79,7 @@ class ProjectStep extends React.Component {
             open={open}
             content="Click to view or delete this image."
             cancelButton="cancel"
-            viewButton="view"
+            // viewButton="view"
             confirmButton="DELETE"
             onCancel={this.handleCancel}
             onConfirm={this.handleConfirm}

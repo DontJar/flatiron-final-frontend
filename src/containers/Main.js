@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import { Grid } from "semantic-ui-react";
-
-import NewProject from "../components/NewProject";
 
 import ProjectsGrid from "./ProjectsGrid";
 

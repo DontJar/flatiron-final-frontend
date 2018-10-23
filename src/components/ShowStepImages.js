@@ -54,6 +54,7 @@ class ShowStepImages extends React.Component {
           <Segment inverted>
             {this.props.images.map(image => (
               <div
+                key={image.id}
                 className="ui raised card"
                 style={{ marginLeft: "auto", marginRight: "auto" }}
               >
@@ -85,7 +86,7 @@ class ShowStepImages extends React.Component {
                       />
                     </div>
                   ) : (
-                    <img src={noImage} className="ui image" />
+                    <img src={noImage} className="ui image" alt="noImage" />
                   )}
                 </div>
               </div>

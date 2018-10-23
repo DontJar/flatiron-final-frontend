@@ -5,9 +5,10 @@ import { Route, Switch, withRouter } from "react-router-dom";
 
 import "./App.css";
 import Header from "./containers/Header";
-import Main from "./containers/Main";
+
 import ProjectsIndex from "./containers/ProjectsIndex";
 import ProjectContainer from "./containers/ProjectContainer";
+import About from "./containers/About";
 import { fetchProjects } from "./redux/actions";
 
 class App extends Component {
@@ -21,7 +22,9 @@ class App extends Component {
       <div>
         <Header />
         <Switch>
-          <Route exact path="/index" render={() => <ProjectsIndex />} />
+          <Route exact path="/" render={() => <ProjectsIndex />} />
+          <Route path="/index" render={() => <ProjectsIndex />} />
+          <Route path="/about" render={() => <About />} />
           <Route
             path="/projects/:id"
             render={data => {
