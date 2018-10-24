@@ -182,11 +182,13 @@ class ProjectCover extends React.Component {
             </div>
           </div>
           <Card.Group centered itemsPerRow={3} style={{ margin: "auto" }}>
-            <ChangeCoverImageModal
-              images={this.props.project.images}
-              currentCover={this.props.project.cover_image_id}
-              projectId={this.props.project.id}
-            />
+            {this.props.project.images.length > 0 && (
+              <ChangeCoverImageModal
+                images={this.props.project.images}
+                currentCover={this.props.project.cover_image_id}
+                projectId={this.props.project.id}
+              />
+            )}
           </Card.Group>
         </Container>
         <br />

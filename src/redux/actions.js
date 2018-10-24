@@ -93,7 +93,7 @@ function deleteStep(stepId) {
   };
 }
 
-function addNewImage(stepId, imageUrl) {
+function addNewImage(stepId, imageUrl, isLoaded) {
   return dispatch => {
     fetch(`${URL}images`, {
       method: "POST",
@@ -107,15 +107,17 @@ function addNewImage(stepId, imageUrl) {
       }
     })
       .then(r => r.json())
-      .then(dispatch(fetchProjects()));
+      .then(_ => {
+        isLoaded && isLoaded();
+        dispatch(fetchProjects());
+      });
   };
 }
 
-function uploadNewImage(stepId, fileToUpload) {
+function uploadNewImage(stepId, fileToUpload, isLoaded) {
   let formData = new FormData();
   formData.append("step_id", stepId);
   formData.append("step_image", fileToUpload);
-
   return dispatch => {
     fetch(`${URL}images`, {
       method: "POST",
@@ -123,10 +125,8 @@ function uploadNewImage(stepId, fileToUpload) {
     })
       .then(r => r.json())
       // .then(json => console.log(json));
-      .then(json => {
-        // console.log(
-        //   `uploadNewImage - stepid: ${stepId} fileToUpload: ${fileToUpload} ${json}`
-        // );
+      .then(_ => {
+        isLoaded && isLoaded();
         dispatch(fetchProjects());
       });
   };
