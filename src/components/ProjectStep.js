@@ -41,7 +41,11 @@ class ProjectStep extends React.Component {
         {this.props.thisStep.images.length > 0 ? (
           <a href={this.props.thisStep.images[0].url}>
             <Image
-              src={this.props.thisStep.images[0].url}
+              src={
+                this.props.thisStep.images[0].smaller_url
+                  ? this.props.thisStep.images[0].smaller_url
+                  : this.props.thisStep.images[0].url
+              }
               style={{ margin: "auto" }}
             />
           </a>

@@ -62,11 +62,11 @@ class ShowStepImages extends React.Component {
                   {image.url ? (
                     <div className="imageContainer" id={image.id}>
                       <img
-                        src={image.url}
+                        src={image.smaller_url ? image.smaller_url : image.url}
                         className="ui image"
                         alt={image.url}
                       />
-                      {/* </a> */}
+
                       <img
                         className="deleteBtn"
                         src={deleteX}

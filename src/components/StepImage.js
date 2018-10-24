@@ -37,7 +37,11 @@ class StepImage extends React.Component {
         <a href={this.props.image.url}>
           <div>
             <Image
-              src={this.props.image.url}
+              src={
+                this.props.image.smaller_url
+                  ? this.props.image.smaller_url
+                  : this.props.image.url
+              }
               size="tiny"
               style={{
                 borderRadius: "5px",

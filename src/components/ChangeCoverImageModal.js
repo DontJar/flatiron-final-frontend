@@ -53,7 +53,7 @@ class ChangeCoverImageModal extends React.Component {
                   {image.url ? (
                     <img
                       alt=""
-                      src={image.url}
+                      src={image.smaller_url ? image.smaller_url : image.url}
                       className="ui image"
                       onClick={e => {
                         this.handleClick(e);

@@ -92,7 +92,13 @@ class ProjectCover extends React.Component {
                 src={
                   this.props.project.images.find(
                     image => image.id === this.props.project.cover_image_id
-                  ).url
+                  ).smaller_url
+                    ? this.props.project.images.find(
+                        image => image.id === this.props.project.cover_image_id
+                      ).smaller_url
+                    : this.props.project.images.find(
+                        image => image.id === this.props.project.cover_image_id
+                      ).url
                 }
               />
             ) : (

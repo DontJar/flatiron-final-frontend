@@ -10,7 +10,13 @@ const ImageCard = props => {
     <Card raised key={props.image.id} className="Image">
       <Card.Content>
         {props.image.url ? (
-          <Image src={props.image.url} />
+          <Image
+            src={
+              props.image._smaller_url
+                ? props.image.smaller_url
+                : props.image.url
+            }
+          />
         ) : (
           <Image src={noImage} />
         )}

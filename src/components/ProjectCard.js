@@ -24,7 +24,13 @@ const ProjectCard = props => {
               src={
                 props.project.images.find(
                   image => image.id === props.project.cover_image_id
-                ).url
+                ).smaller_url
+                  ? props.project.images.find(
+                      image => image.id === props.project.cover_image_id
+                    ).smaller_url
+                  : props.project.images.find(
+                      image => image.id === props.project.cover_image_id
+                    ).url
               }
             />
           ) : (
