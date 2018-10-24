@@ -58,78 +58,80 @@ class About extends Component {
 
   render() {
     return (
-      <div style={{ marginTop: "6em", marginLeft: "4em" }}>
-        <img
-          src={haveIdea}
-          style={{ height: "7em", marginLeft: "2em" }}
-          alt="start"
-        />
-        <div>Sart something new</div>
-        <img
-          src={logProgress}
-          style={{ height: "7em", marginTop: "3em" }}
-          alt="log"
-        />
-        <div>Log your progress along the way</div>
-        <img
-          src={enjoyWork}
-          style={{ height: "7em", marginTop: "3em" }}
-          alt="enjoy"
-        />
-        <div>Enjoy all your hard work</div>
+      <div style={{ width: "100%", textAlign: "center" }}>
+        <div style={{ marginTop: "6em", display: "inline-block" }}>
+          <img
+            src={haveIdea}
+            style={{ height: "7em", marginLeft: "2em" }}
+            alt="start"
+          />
+          <div style={{ marginLeft: "1em" }}>Start something new</div>
+          <img
+            src={logProgress}
+            style={{ height: "7em", marginTop: "3em" }}
+            alt="log"
+          />
+          <div style={{ marginLeft: "1em" }}>Log your progress</div>
+          <img
+            src={enjoyWork}
+            style={{ height: "7em", marginTop: "3em" }}
+            alt="enjoy"
+          />
+          <div style={{ marginLeft: "1em" }}>Enjoy your hard work</div>
 
-        <Modal
-          trigger={
-            <div>
-              <div className="arrow bounce" />
+          <Modal
+            trigger={
+              <div>
+                <div className="arrow bounce" />
 
-              <img
-                onClick={() => this.toggleModal()}
-                alt="arrow"
-                style={{
-                  position: "fixed",
-                  bottom: "15px",
-                  right: "15px",
-                  height: "70px"
-                }}
-                src={plusPNG}
-              />
-            </div>
-          }
-          open={this.state.modalOpen}
-          content={
-            <Segment inverted>
-              <Form inverted onSubmit={event => this.submitChecker(event)}>
-                <Form.Group widths="equal">
-                  <Form.Input
-                    fluid
-                    label="Name your new project"
-                    placeholder="Project name"
-                    value={this.state.projectName}
-                    onChange={e => this.handelNameChange(e)}
-                  />
-                  <div className="field">
-                    <label>Describe your project</label>
-                    <div className="ui fluid input">
-                      <textarea
-                        placeholder="Project description"
-                        value={this.state.projectDecription}
-                        onChange={e => this.handelDescriptionChange(e)}
-                      />
-                    </div>
-                  </div>
-                </Form.Group>
-                <br />
-                <Button type="submit">Submit</Button>
-                <Button
-                  icon="delete"
-                  floated="right"
+                <img
                   onClick={() => this.toggleModal()}
+                  alt="arrow"
+                  style={{
+                    position: "fixed",
+                    bottom: "15px",
+                    right: "15px",
+                    height: "70px"
+                  }}
+                  src={plusPNG}
                 />
-              </Form>
-            </Segment>
-          }
-        />
+              </div>
+            }
+            open={this.state.modalOpen}
+            content={
+              <Segment inverted>
+                <Form inverted onSubmit={event => this.submitChecker(event)}>
+                  <Form.Group widths="equal">
+                    <Form.Input
+                      fluid
+                      label="Name your new project"
+                      placeholder="Project name"
+                      value={this.state.projectName}
+                      onChange={e => this.handelNameChange(e)}
+                    />
+                    <div className="field">
+                      <label>Describe your project</label>
+                      <div className="ui fluid input">
+                        <textarea
+                          placeholder="Project description"
+                          value={this.state.projectDecription}
+                          onChange={e => this.handelDescriptionChange(e)}
+                        />
+                      </div>
+                    </div>
+                  </Form.Group>
+                  <br />
+                  <Button type="submit">Submit</Button>
+                  <Button
+                    icon="delete"
+                    floated="right"
+                    onClick={() => this.toggleModal()}
+                  />
+                </Form>
+              </Segment>
+            }
+          />
+        </div>
       </div>
     );
   }

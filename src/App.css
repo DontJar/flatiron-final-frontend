@@ -38,6 +38,10 @@
   height: 20px;
 }
 
+.stepDesc {
+  margin-top: 0px !important;
+}
+
 .arrow {
   position: fixed;
   bottom: 125px;

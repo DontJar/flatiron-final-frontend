@@ -59,17 +59,39 @@ class ProjectStep extends React.Component {
             </Card.Group>
           </div>
         ) : null}
+
+        {/* Stalled attempt to replicate the the left attached label showing the step count.
+          <div
+          style={{
+            marginLeft: "1em",
+            marginRight: "1em",
+            backgroundColor: "white",
+            borderRadius: ".25em"
+          }}
+        >
+          <div style={{ backgroundColor: "#e5e5e5" }}>
+            <div>Step {this.props.stepNumber}: </div>
+          </div>
+          <p className="stepDesc" style={{ textIndent: "55px" }}>
+            {this.props.thisStep.description}
+          </p>
+        </div> */}
+
         <div
           className="ui segment"
           style={{ marginLeft: "1em", marginRight: "1em" }}
         >
-          <div className="ui top left attached label">
+          <div
+            className="ui top left attached label"
+            style={{ width: "-webkit-fill-available" }}
+          >
             Step {this.props.stepNumber}:
           </div>
-          <p style={{ textIndent: "50px" }}>
+          <p className="stepDesc" style={{ textIndent: "55px" }}>
             {this.props.thisStep.description}
           </p>
         </div>
+
         <ShowStepImages images={this.props.thisStep.images} />
         <br />
         <div style={{ marginLeft: "1em", marginRight: "1em" }}>

@@ -88,7 +88,7 @@ class NewStepModalForm extends React.Component {
                   onChange={e => this.handelChange(e)}
                 />
                 {!this.state.isChecked ? (
-                  <div>
+                  <div style={{ marginLeft: ".5em" }}>
                     <Form.Input
                       fluid
                       label="Image URL"
@@ -104,13 +104,12 @@ class NewStepModalForm extends React.Component {
                         id="step_image"
                         name="step_image"
                         accept="image/*"
-                        capture
                       />
                     </div>
                     <br />
                   </div>
                 ) : (
-                  <div>
+                  <div style={{ marginLeft: ".5em" }}>
                     <Form.Input
                       disabled
                       fluid
@@ -128,7 +127,6 @@ class NewStepModalForm extends React.Component {
                         id="step_image"
                         name="step_image"
                         accept="image/*"
-                        capture
                       />
                     </div>
                     <br />
