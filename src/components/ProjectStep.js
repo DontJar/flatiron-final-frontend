@@ -54,7 +54,7 @@ class ProjectStep extends React.Component {
         )}
         {this.props.thisStep.images.length > 1 ? (
           <div>
-            <Card.Group centered itemsPerRow={3} style={{ margin: "auto" }}>
+            <Card.Group centered itemsPerRow={4} style={{ margin: ".5em" }}>
               {this.props.thisStep.images.slice(1).map(image => (
                 <Card centered key={image.id}>
                   <StepImage image={image} />
@@ -74,7 +74,7 @@ class ProjectStep extends React.Component {
           >
             Step {this.props.stepNumber}:
           </div>
-          <p className="stepDesc" style={{ textIndent: "55px" }}>
+          <p className="stepDesc" style={{ textIndent: "25px" }}>
             {this.props.thisStep.description}
           </p>
         </div>

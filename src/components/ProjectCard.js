@@ -18,8 +18,8 @@ const ProjectCard = props => {
               style={{
                 borderRadius: "5px",
                 objectFit: "cover",
-                width: "275px",
-                height: "275px"
+                width: "200px",
+                height: "200px"
               }}
               src={
                 props.project.images.find(
@@ -41,7 +41,7 @@ const ProjectCard = props => {
           <div className="content" style={{ textAlign: "center" }}>
             <div
               className="ui center aligned header"
-              style={{ marginTop: ".25em" }}
+              style={{ marginTop: ".25em", marginBottom: "-1em" }}
             >
               {props.project.title}
             </div>

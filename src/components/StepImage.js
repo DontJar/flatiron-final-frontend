@@ -33,9 +33,9 @@ class StepImage extends React.Component {
     // debugger;
     const { imageOpen } = this.state;
     return (
-      <Card.Content>
+      <div className="content">
         <a href={this.props.image.url}>
-          <div>
+          <div style={{ margin: "-1em" }}>
             <Image
               src={
                 this.props.image.smaller_url
@@ -46,8 +46,8 @@ class StepImage extends React.Component {
               style={{
                 borderRadius: "5px",
                 objectFit: "cover",
-                width: "100px",
-                height: "100px"
+                width: "75x",
+                height: "75px"
               }}
             />
           </div>
@@ -61,7 +61,7 @@ class StepImage extends React.Component {
           confirmButton="DELETE"
           onConfirm={this.handleImageDelete}
         />
-      </Card.Content>
+      </div>
     );
   }
 }
