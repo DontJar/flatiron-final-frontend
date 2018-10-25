@@ -57,7 +57,7 @@ class ProjectContainer extends React.Component {
                       thisStep={step}
                       stepNumber={this.props.project.steps.indexOf(step) + 1}
                     />
-                    <Divider />
+                    <div className="ui divider" style={{ marginTop: "2em" }} />
                   </div>
                 ))}
               <br />

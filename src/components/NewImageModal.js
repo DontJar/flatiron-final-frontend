@@ -88,7 +88,7 @@ class NewImageModal extends React.Component {
             style={{ marginLeft: "1em", marginRight: "1em" }}
             onClick={() => this.toggleModal()}
             name="camera"
-            floated="right"
+            floated="left"
             color="blue"
           >
             <Icon name="camera" />

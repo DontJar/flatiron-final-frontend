@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Button, Confirm, Card } from "semantic-ui-react";
+import { Image, Button, Confirm, Card, Icon } from "semantic-ui-react";
 
 import { connect } from "react-redux";
 
@@ -36,6 +36,9 @@ class ProjectStep extends React.Component {
   };
 
   setSelectedImage = pos => {
+    // document
+    //   .getElementById(`stepCoverImage ${this.props.thisStep.id}`)
+    //   .scrollIntoView();
     this.setState({
       selectedImagePos: pos
     });
@@ -48,6 +51,7 @@ class ProjectStep extends React.Component {
         {this.props.thisStep.images.length > 0 ? (
           <a href={this.props.thisStep.images[this.state.selectedImagePos].url}>
             <Image
+              // id=`stepCoverImage ${this.props.thisStep.id}`
               src={
                 this.props.thisStep.images[this.state.selectedImagePos]
                   .smaller_url
@@ -55,7 +59,12 @@ class ProjectStep extends React.Component {
                       .smaller_url
                   : this.props.thisStep.images[this.state.selectedImagePos].url
               }
-              style={{ margin: "auto" }}
+              style={{
+                margin: "auto",
+                objectFit: "cover",
+                width: "415px",
+                height: "415px"
+              }}
             />
           </a>
         ) : (
@@ -95,18 +104,23 @@ class ProjectStep extends React.Component {
         <ShowStepImages images={this.props.thisStep.images} />
         <br />
         <div style={{ marginLeft: "1em", marginRight: "1em" }}>
-          <Button onClick={this.deleteWarning}>Remove Step</Button>
-
+          <NewImageModal stepId={this.props.thisStep.id} />
+          <Button
+            onClick={this.deleteWarning}
+            color="red"
+            style={{ float: "right", marginTop: "0em", marginRight: "1em" }}
+          >
+            Delete Step
+            <Icon name="trash alternate icon" style={{ marginLeft: ".5em" }} />
+          </Button>
           <Confirm
             open={open}
             content="Click to view or delete this image."
             cancelButton="cancel"
-            // viewButton="view"
             confirmButton="DELETE"
             onCancel={this.handleCancel}
             onConfirm={this.handleConfirm}
           />
-          <NewImageModal stepId={this.props.thisStep.id} />
         </div>
         <br />
       </div>

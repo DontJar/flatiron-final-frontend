@@ -7,7 +7,8 @@ import {
   Form,
   TextArea,
   Card,
-  Confirm
+  Confirm,
+  Icon
 } from "semantic-ui-react";
 import { withRouter } from "react-router";
 
@@ -129,13 +130,11 @@ class ProjectCover extends React.Component {
                     size="tiny"
                     onClick={this.deleteWarning}
                     color="red"
-                    // style={{
-                    //   position: "absolute",
-                    //   right: "1em",
-                    //   marginTop: ".25"
-                    // }}
                   >
-                    <strong>X</strong>
+                    <Icon
+                      name="trash alternate icon"
+                      style={{ margin: "0em" }}
+                    />
                     <Confirm
                       open={open}
                       content="Confirm that you would like to delete this entire project this step."
@@ -149,11 +148,6 @@ class ProjectCover extends React.Component {
                     size="tiny"
                     floated="right"
                     onClick={() => this.handleEditClick()}
-                    // style={{
-                    //   position: "absolute",
-                    //   right: "1em",
-                    //   marginTop: "-3em"
-                    // }}
                   >
                     Edit
                   </Button>

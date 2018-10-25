@@ -46,7 +46,7 @@ class ShowStepImages extends React.Component {
       <Modal
         trigger={
           <Button attached="bottom" onClick={() => this.toggleModal()}>
-            Show/Delete images related to this step
+            View/Delete images
           </Button>
         }
         open={this.state.modalOpen}
