@@ -18,6 +18,10 @@ class ProjectsIndex extends React.Component {
     };
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   toggleModal() {
     this.setState({
       modalOpen: !this.state.modalOpen

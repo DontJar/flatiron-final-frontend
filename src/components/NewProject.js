@@ -58,7 +58,7 @@ class NewProject extends React.Component {
           <Dropdown.Item
             onClick={() => this.toggleModal()}
             text="Create new project"
-            icon="edit"
+            icon="plus circle"
           />
         }
         open={this.state.modalOpen}

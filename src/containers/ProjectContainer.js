@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Segment, Dimmer, Loader, Divider } from "semantic-ui-react";
+import { Segment, Dimmer, Loader } from "semantic-ui-react";
 import { withRouter } from "react-router";
 import { deleteProject } from "../redux/actions";
 
@@ -12,6 +12,10 @@ class ProjectContainer extends React.Component {
   state = {
     open: false
   };
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
 
   deleteWarning = () => {
     this.setState({
