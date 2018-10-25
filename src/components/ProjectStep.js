@@ -35,10 +35,19 @@ class ProjectStep extends React.Component {
     this.props.deleteStep(this.props.thisStep.id);
   };
 
-  setSelectedImage = pos => {
-    // document
-    //   .getElementById(`stepCoverImage ${this.props.thisStep.id}`)
-    //   .scrollIntoView();
+  setSelectedImage = (pos, stepId) => {
+    const element = document.getElementById(`stepCoverImage ${stepId}`);
+    const offset = -27;
+    const bodyRect = document.body.getBoundingClientRect().top;
+    const elementRect = element.getBoundingClientRect().top;
+    const elementPosition = elementRect - bodyRect;
+    const offsetPosition = elementPosition - offset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth"
+    });
+    // document.getElementById(`stepCoverImage ${stepId}`).scrollIntoView({top: "3em", behavior: "instant"});
     this.setState({
       selectedImagePos: pos
     });
@@ -51,7 +60,7 @@ class ProjectStep extends React.Component {
         {this.props.thisStep.images.length > 0 ? (
           <a href={this.props.thisStep.images[this.state.selectedImagePos].url}>
             <Image
-              // id=`stepCoverImage ${this.props.thisStep.id}`
+              id={`stepCoverImage ${this.props.thisStep.id}`}
               src={
                 this.props.thisStep.images[this.state.selectedImagePos]
                   .smaller_url

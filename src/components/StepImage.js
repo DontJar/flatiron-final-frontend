@@ -30,7 +30,7 @@ class StepImage extends React.Component {
   };
 
   selectThisImage = imagePos => {
-    this.props.setSelectedImage(imagePos);
+    this.props.setSelectedImage(imagePos, this.props.image.step_id);
   };
 
   render() {
