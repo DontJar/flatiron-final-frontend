@@ -12,7 +12,8 @@ import NewImageModal from "./NewImageModal";
 class ProjectStep extends React.Component {
   state = {
     open: false,
-    imageOpen: false
+    imageOpen: false,
+    selectedImagePos: 0
   };
 
   deleteWarning = () => {
@@ -34,17 +35,25 @@ class ProjectStep extends React.Component {
     this.props.deleteStep(this.props.thisStep.id);
   };
 
+  setSelectedImage = pos => {
+    this.setState({
+      selectedImagePos: pos
+    });
+  };
+
   render() {
     const { open } = this.state;
     return (
       <div>
         {this.props.thisStep.images.length > 0 ? (
-          <a href={this.props.thisStep.images[0].url}>
+          <a href={this.props.thisStep.images[this.state.selectedImagePos].url}>
             <Image
               src={
-                this.props.thisStep.images[0].smaller_url
-                  ? this.props.thisStep.images[0].smaller_url
-                  : this.props.thisStep.images[0].url
+                this.props.thisStep.images[this.state.selectedImagePos]
+                  .smaller_url
+                  ? this.props.thisStep.images[this.state.selectedImagePos]
+                      .smaller_url
+                  : this.props.thisStep.images[this.state.selectedImagePos].url
               }
               style={{ margin: "auto" }}
             />
@@ -55,9 +64,13 @@ class ProjectStep extends React.Component {
         {this.props.thisStep.images.length > 1 ? (
           <div>
             <Card.Group centered itemsPerRow={4} style={{ margin: ".5em" }}>
-              {this.props.thisStep.images.slice(1).map(image => (
+              {this.props.thisStep.images.map(image => (
                 <Card centered key={image.id}>
-                  <StepImage image={image} />
+                  <StepImage
+                    image={image}
+                    setSelectedImage={this.setSelectedImage}
+                    imagePos={this.props.thisStep.images.indexOf(image)}
+                  />
                 </Card>
               ))}
             </Card.Group>

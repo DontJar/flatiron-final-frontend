@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Confirm, Card } from "semantic-ui-react";
+import { Image, Confirm } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 import { deleteImage } from "../redux/actions";
@@ -29,29 +29,31 @@ class StepImage extends React.Component {
     });
   };
 
+  selectThisImage = imagePos => {
+    this.props.setSelectedImage(imagePos);
+  };
+
   render() {
-    // debugger;
     const { imageOpen } = this.state;
     return (
       <div className="content">
-        <a href={this.props.image.url}>
-          <div style={{ margin: "-1em" }}>
-            <Image
-              src={
-                this.props.image.smaller_url
-                  ? this.props.image.smaller_url
-                  : this.props.image.url
-              }
-              size="tiny"
-              style={{
-                borderRadius: "5px",
-                objectFit: "cover",
-                width: "75x",
-                height: "75px"
-              }}
-            />
-          </div>
-        </a>
+        <div style={{ margin: "-1em" }}>
+          <Image
+            onClick={() => this.selectThisImage(this.props.imagePos)}
+            src={
+              this.props.image.smaller_url
+                ? this.props.image.smaller_url
+                : this.props.image.url
+            }
+            size="tiny"
+            style={{
+              borderRadius: "5px",
+              objectFit: "cover",
+              width: "75x",
+              height: "75px"
+            }}
+          />
+        </div>
 
         <Confirm
           open={imageOpen}
