@@ -135,6 +135,7 @@ class ProjectCover extends React.Component {
                       name="trash alternate icon"
                       style={{ margin: "0em" }}
                     />
+
                     <Confirm
                       open={open}
                       content="Confirm that you would like to delete this entire project this step."
