@@ -24,7 +24,14 @@ class ProjectsIndex extends React.Component {
     });
   }
 
+  // this.props.projects.map(project => project.images.sort(image => image.created_at))
+  // this.props.projects.sort((a, b) => a.updated_at - b.updated_at)
+  // testers() {this.props.projects.sort((a, b) =>
+  //   (a.steps.sort((a, b) a.id - b.id)[0].id) - (b.steps.sort((a, b) a.id - b.id)[0].id)))
+  // }
+
   render() {
+    debugger;
     this.props.projects.length < 1 && this.props.history.push("/about");
     return (
       <div>
