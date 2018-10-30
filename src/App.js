@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Route, Switch, withRouter } from "react-router-dom";
-// import { Sticky } from "semantic-ui-react";
 
 import "./App.css";
 import Header from "./containers/Header";
@@ -17,7 +16,6 @@ class App extends Component {
   }
 
   render() {
-    // debugger;
     return (
       <div>
         <Header />

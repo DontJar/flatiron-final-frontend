@@ -66,8 +66,6 @@ class NewProjectModal extends Component {
             />
           ) : (
             <div>
-              <div className="arrow bounce" />
-
               <img
                 onClick={() => this.toggleModal()}
                 alt="arrow"

@@ -73,7 +73,6 @@ class ProjectCover extends React.Component {
       day: "numeric"
     };
     const { open } = this.state;
-    // debugger;
     return (
       <div style={{ marginTop: "5em" }}>
         <Container fluid>

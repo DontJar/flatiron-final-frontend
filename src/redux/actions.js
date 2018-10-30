@@ -1,8 +1,8 @@
 // for local dev use only
-const URL = "http://localhost:3000/api/v1/";
+// const URL = "http://localhost:3000/api/v1/";
 
 // for deploy use only
-// const URL = "https://intense-fjord-82978.herokuapp.com/api/v1/";
+const URL = "https://intense-fjord-82978.herokuapp.com/api/v1/";
 
 function fetchProjects() {
   return dispatch => {

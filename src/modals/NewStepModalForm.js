@@ -71,12 +71,6 @@ class NewStepModalForm extends React.Component {
 
   render() {
     return (
-      // <Modal
-      //   trigger={
-      //     <Button attached="bottom" onClick={() => this.toggleModal()}>
-      //       Add Step
-      //     </Button>
-
       <Modal
         trigger={
           <div>

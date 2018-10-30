@@ -36,6 +36,7 @@ class About extends Component {
             />
           </NavLink>
           <div style={{ marginLeft: "1em" }}>Enjoy your hard work</div>
+          <div className="arrow bounce" />
           <NewProjectModal />
         </div>
       </div>
