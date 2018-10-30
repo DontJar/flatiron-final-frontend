@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import { setImageToCover } from "../redux/actions";
 
-import noImage from "../no-image.png";
+import noImage from "../Images/no-image.png";
 
 class ChangeCoverImageModal extends React.Component {
   constructor(props) {

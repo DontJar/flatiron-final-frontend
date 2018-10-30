@@ -1,17 +1,20 @@
-import React from "react";
-import { Form, Modal, Segment, Button, Dropdown } from "semantic-ui-react";
+// ✔️
+
+import React, { Component } from "react";
+import { Modal, Button, Segment, Form, Dropdown } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-
 import { createNewProject } from "../redux/actions";
 
-class NewProject extends React.Component {
+import plusPNG from "../Images/plus_one.png";
+
+class NewProjectModal extends Component {
   constructor() {
     super();
     this.state = {
       modalOpen: false,
       projectName: "",
-      projectDescription: ""
+      projectDecription: ""
     };
   }
 
@@ -55,11 +58,29 @@ class NewProject extends React.Component {
     return (
       <Modal
         trigger={
-          <Dropdown.Item
-            onClick={() => this.toggleModal()}
-            text="Create new project"
-            icon="plus circle"
-          />
+          this.props.isMenu ? (
+            <Dropdown.Item
+              onClick={() => this.toggleModal()}
+              text="Create new project"
+              icon="plus circle"
+            />
+          ) : (
+            <div>
+              <div className="arrow bounce" />
+
+              <img
+                onClick={() => this.toggleModal()}
+                alt="arrow"
+                style={{
+                  position: "fixed",
+                  bottom: "15px",
+                  right: "15px",
+                  height: "70px"
+                }}
+                src={plusPNG}
+              />
+            </div>
+          )
         }
         open={this.state.modalOpen}
         content={
@@ -110,5 +131,5 @@ export default withRouter(
   connect(
     null,
     mapDispatchToProps
-  )(NewProject)
+  )(NewProjectModal)
 );

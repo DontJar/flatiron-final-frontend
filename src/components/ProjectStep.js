@@ -3,11 +3,11 @@ import { Image, Button, Confirm, Card, Icon } from "semantic-ui-react";
 
 import { connect } from "react-redux";
 
-import noImage from "../no-image.png";
+import noImage from "../Images/no-image.png";
 import { deleteStep } from "../redux/actions";
 import StepImage from "./StepImage";
-import ShowStepImages from "./ShowStepImages";
-import NewImageModal from "./NewImageModal";
+import ShowStepImages from "../modals/ShowStepImagesModal";
+import NewImageModal from "../modals/NewImageModal";
 
 class ProjectStep extends React.Component {
   state = {

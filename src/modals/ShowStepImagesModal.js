@@ -3,10 +3,8 @@ import { Modal, Button, Segment, Confirm } from "semantic-ui-react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 
-import noImage from "../no-image.png";
-// import deleteIcon from "../delete.png";
-import deleteX from "../deleteX.png";
-// import trash from "../trash.png";
+import noImage from "../Images/no-image.png";
+import deleteX from "../Images/deleteX.png";
 import { deleteImage } from "../redux/actions";
 
 class ShowStepImages extends React.Component {

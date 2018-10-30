@@ -3,14 +3,11 @@ import { Dropdown, Image, Menu } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router";
 
-import NewProject from "../components/NewProject";
-import loggrLogo from "../log.svg";
-
-// debugger;
+import NewProjectModal from "../modals/NewProjectModal";
+import log from "../Images/log.png";
 
 const NavBar = props => (
   <Menu fixed="top">
-    {/* <Container> */}
     <Dropdown item icon="bars" simple>
       <Dropdown.Menu>
         <Dropdown.Item
@@ -18,18 +15,15 @@ const NavBar = props => (
           text="About Loggr"
           icon="question"
         />
-        <NewProject />
+        <NewProjectModal isMenu="true" />
       </Dropdown.Menu>
     </Dropdown>
 
     <Menu.Menu position="right" style={{ margin: ".5em" }}>
-      Loggr
       <NavLink to="/index">
-        <Image src={loggrLogo} style={{ height: "2em" }} />
+        <Image src={log} style={{ height: "1.75em" }} />
       </NavLink>
     </Menu.Menu>
-
-    {/* </Container> */}
   </Menu>
 );
 

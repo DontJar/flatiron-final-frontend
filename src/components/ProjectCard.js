@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-import noImage from "../no-image.png";
+import noImage from "../Images/no-image.png";
 
 const ProjectCard = props => {
   // debugger;

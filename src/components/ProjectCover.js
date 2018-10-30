@@ -13,8 +13,8 @@ import {
 import { withRouter } from "react-router";
 
 import { updateProject, deleteProject } from "../redux/actions";
-import ChangeCoverImageModal from "./ChangeCoverImageModal";
-import noImage from "../no-image.png";
+import ChangeCoverImageModal from "../modals/ChangeCoverImageModal";
+import noImage from "../Images/no-image.png";
 
 class ProjectCover extends React.Component {
   constructor() {

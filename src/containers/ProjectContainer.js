@@ -2,41 +2,15 @@ import React from "react";
 import { connect } from "react-redux";
 import { Segment, Dimmer, Loader } from "semantic-ui-react";
 import { withRouter } from "react-router";
-import { deleteProject } from "../redux/actions";
 
 import ProjectCover from "../components/ProjectCover";
 import ProjectStep from "../components/ProjectStep";
-import NewStepModalForm from "../components/NewStepModalForm";
+import NewStepModalForm from "../modals/NewStepModalForm";
 
 class ProjectContainer extends React.Component {
-  state = {
-    open: false
-  };
-
   componentDidMount() {
     window.scrollTo(0, 0);
   }
-
-  deleteWarning = () => {
-    this.setState({
-      open: true
-    });
-  };
-
-  handleCancel = () => {
-    console.log("'Cancel' clicked");
-    this.setState({
-      open: false
-    });
-  };
-
-  handleConfirm = () => {
-    this.setState({
-      open: false
-    });
-    this.props.history.push("/index");
-    this.props.deleteProject(this.props.project.id);
-  };
 
   render() {
     return (
@@ -51,7 +25,7 @@ class ProjectContainer extends React.Component {
           </Segment>
         ) : (
           <div>
-            <div>
+            <div style={{ marginBottom: "3em" }}>
               <ProjectCover project={this.props.project} />
               {this.props.project &&
                 this.props.project.steps &&
@@ -81,9 +55,4 @@ const mapStateToProps = (state, propsFromParent) => {
   };
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    { deleteProject }
-  )(ProjectContainer)
-);
+export default withRouter(connect(mapStateToProps)(ProjectContainer));

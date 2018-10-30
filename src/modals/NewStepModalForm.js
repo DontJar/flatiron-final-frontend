@@ -4,6 +4,8 @@ import { withRouter } from "react-router";
 import { connect } from "react-redux";
 
 import { createNewStep, uploadNewImage } from "../redux/actions";
+// import newStep from "../newStep.svg";
+import newStep from "../Images/newStep.png";
 
 class NewStepModalForm extends React.Component {
   constructor() {
@@ -69,11 +71,27 @@ class NewStepModalForm extends React.Component {
 
   render() {
     return (
+      // <Modal
+      //   trigger={
+      //     <Button attached="bottom" onClick={() => this.toggleModal()}>
+      //       Add Step
+      //     </Button>
+
       <Modal
         trigger={
-          <Button attached="bottom" onClick={() => this.toggleModal()}>
-            Add Step
-          </Button>
+          <div>
+            <img
+              alt="new step"
+              onClick={() => this.toggleModal()}
+              style={{
+                position: "fixed",
+                bottom: "15px",
+                left: "15px",
+                height: "70px"
+              }}
+              src={newStep}
+            />
+          </div>
         }
         open={this.state.modalOpen}
         content={
@@ -155,9 +173,7 @@ class NewStepModalForm extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     createNewStep: (newStep, imageFile) =>
-      dispatch(createNewStep(newStep, imageFile))
-  };
-  return {
+      dispatch(createNewStep(newStep, imageFile)),
     uploadNewImage: (stepId, fileToUpload) => {
       dispatch(uploadNewImage(stepId, fileToUpload));
     }
