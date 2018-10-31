@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import noImage from "../Images/no-image.png";
 
 const ProjectCard = props => {
-  // debugger;
   return (
     <Card raised key={props.project.id}>
       <Link className="item" to={`/projects/${props.project.id}`}>

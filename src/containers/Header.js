@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Dropdown, Image, Menu } from "semantic-ui-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
@@ -9,6 +9,10 @@ import log from "../Images/log.png";
 
 class NavBar extends Component {
   render() {
+    // this is being used to sort projects by most recenly updated
+    const recentUpdates = this.props.projects
+      .sort((a, b) => new Date(a.updated_at) - new Date(b.updated_at))
+      .slice(-3);
     return (
       <Menu fixed="top">
         <Dropdown item icon="bars" simple>
@@ -21,9 +25,21 @@ class NavBar extends Component {
             <NewProjectModal isMenu="true" />
             <Dropdown item text="Recently Updated">
               <Dropdown.Menu>
-                <Dropdown.Item>Small</Dropdown.Item>
-                <Dropdown.Item>Medium</Dropdown.Item>
-                <Dropdown.Item>Large</Dropdown.Item>
+                {recentUpdates[0] && (
+                  <NavLink to={`/projects/${recentUpdates[0].id}`}>
+                    <Dropdown.Item>{recentUpdates[0].title}</Dropdown.Item>
+                  </NavLink>
+                )}
+                {recentUpdates[1] && (
+                  <NavLink to={`/projects/${recentUpdates[1].id}`}>
+                    <Dropdown.Item>{recentUpdates[1].title}</Dropdown.Item>
+                  </NavLink>
+                )}
+                {recentUpdates[2] && (
+                  <NavLink to={`/projects/${recentUpdates[2].id}`}>
+                    <Dropdown.Item>{recentUpdates[2].title}</Dropdown.Item>
+                  </NavLink>
+                )}
               </Dropdown.Menu>
             </Dropdown>
           </Dropdown.Menu>
