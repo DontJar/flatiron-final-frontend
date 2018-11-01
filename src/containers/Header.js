@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Dropdown, Image, Menu } from "semantic-ui-react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
@@ -23,25 +23,23 @@ class NavBar extends Component {
               icon="question"
             />
             <NewProjectModal isMenu="true" />
-            <Dropdown item text="Recently Updated">
-              <Dropdown.Menu>
-                {recentUpdates[0] && (
-                  <NavLink to={`/projects/${recentUpdates[0].id}`}>
-                    <Dropdown.Item>{recentUpdates[0].title}</Dropdown.Item>
-                  </NavLink>
-                )}
-                {recentUpdates[1] && (
-                  <NavLink to={`/projects/${recentUpdates[1].id}`}>
-                    <Dropdown.Item>{recentUpdates[1].title}</Dropdown.Item>
-                  </NavLink>
-                )}
-                {recentUpdates[2] && (
-                  <NavLink to={`/projects/${recentUpdates[2].id}`}>
-                    <Dropdown.Item>{recentUpdates[2].title}</Dropdown.Item>
-                  </NavLink>
-                )}
-              </Dropdown.Menu>
-            </Dropdown>
+            <Dropdown.Divider />
+            <Dropdown.Header>Recently Updated</Dropdown.Header>
+            {recentUpdates[0] && (
+              <NavLink to={`/projects/${recentUpdates[0].id}`}>
+                <Dropdown.Item icon="images" text={recentUpdates[0].title} />
+              </NavLink>
+            )}
+            {recentUpdates[1] && (
+              <NavLink to={`/projects/${recentUpdates[1].id}`}>
+                <Dropdown.Item icon="images" text={recentUpdates[1].title} />
+              </NavLink>
+            )}
+            {recentUpdates[2] && (
+              <NavLink to={`/projects/${recentUpdates[2].id}`}>
+                <Dropdown.Item icon="images" text={recentUpdates[2].title} />
+              </NavLink>
+            )}
           </Dropdown.Menu>
         </Dropdown>
 

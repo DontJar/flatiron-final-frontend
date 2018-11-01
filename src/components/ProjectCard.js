@@ -6,7 +6,7 @@ import noImage from "../Images/no-image.png";
 
 const ProjectCard = props => {
   return (
-    <Card raised key={props.project.id}>
+    <Card key={props.project.id}>
       <Link className="item" to={`/projects/${props.project.id}`}>
         <Card.Content>
           {props.project.cover_image_id &&
@@ -15,7 +15,7 @@ const ProjectCard = props => {
           ) !== undefined ? (
             <Image
               style={{
-                borderRadius: "5px",
+                borderRadius: "4px",
                 objectFit: "cover",
                 width: "200px",
                 height: "200px"

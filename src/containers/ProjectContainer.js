@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Segment, Dimmer, Loader } from "semantic-ui-react";
+import { Segment, Dimmer } from "semantic-ui-react";
 import { withRouter } from "react-router";
 
 import spinner from "../Images/loggr spinner.gif";
