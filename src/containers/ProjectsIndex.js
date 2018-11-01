@@ -1,7 +1,9 @@
 import React from "react";
-import { Card } from "semantic-ui-react";
+import { Card, Segment, Dimmer } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+
+import spinner from "../Images/loggr spinner.gif";
 
 import ProjectCard from "../components/ProjectCard";
 import NewProjectModal from "../modals/NewProjectModal";
@@ -25,8 +27,13 @@ class ProjectsIndex extends React.Component {
   }
 
   render() {
-    this.props.projects.length < 1 && this.props.history.push("/about");
-    return (
+    return !this.props.projects ? (
+      <Segment>
+        <Dimmer active inverted>
+          <img src={spinner} alt="loading..." style={{ marginTop: "12em" }} />
+        </Dimmer>
+      </Segment>
+    ) : (
       <div>
         <div style={{ marginTop: "4em", marginBottom: "6.5em" }}>
           <div

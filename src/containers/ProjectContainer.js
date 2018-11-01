@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { Segment, Dimmer, Loader } from "semantic-ui-react";
 import { withRouter } from "react-router";
 
+import spinner from "../Images/loggr spinner.gif";
+
 import ProjectCover from "../components/ProjectCover";
 import ProjectStep from "../components/ProjectStep";
 import NewStepModalForm from "../modals/NewStepModalForm";
@@ -18,9 +20,11 @@ class ProjectContainer extends React.Component {
         {!this.props.project ? (
           <Segment>
             <Dimmer active inverted>
-              <Loader style={{ marginTop: "12em" }} inverted>
-                Loading
-              </Loader>
+              <img
+                src={spinner}
+                alt="loading..."
+                style={{ marginTop: "12em" }}
+              />
             </Dimmer>
           </Segment>
         ) : (
