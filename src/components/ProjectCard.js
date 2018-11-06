@@ -33,7 +33,13 @@ const ProjectCard = props => {
               }
             />
           ) : (
-            <Image src={noImage} style={{ marginTop: "5em" }} />
+            <Image
+              src={noImage}
+              style={{
+                width: "200px",
+                height: "200px"
+              }}
+            />
           )}
           <br />
 
